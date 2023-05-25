@@ -16,7 +16,7 @@ static int	ft_merge_two_buff(char **buf1, char *buf2, int buf2_len)
 {
 	int		len;
 	int		nl_index;
-	char	buf1_cpy;
+	char	*buf1_cpy;
 
 	if (!buf1)
 		return (-1);
@@ -28,8 +28,10 @@ static int	ft_merge_two_buff(char **buf1, char *buf2, int buf2_len)
 		if (buf2[nl_index] == '\n')
 			break ;
 	}
-	len = strlen(*buf1);
-	buf1_cpy = realloc(*buf1, sizeof(char) * (len + nl_index + 1));
+	len = 0;
+	if (*buf1)
+		len = strlen(*buf1);
+	buf1_cpy = (char *)realloc(*buf1, sizeof(char) * (len + nl_index + 1));
 	if (!buf1_cpy)
 		return (-1);
 	*buf1 = buf1_cpy;
@@ -57,7 +59,7 @@ static int	ft_read_line(t_fd_info *fd_info, char **buf)
 		if (index >= ret)
 			continue ;
 		fd_info->buf = strndup(buf2 + index + 1, ret - index);
-		return (0);
+		return (1);
 	}
 	return (0);
 }
@@ -65,7 +67,6 @@ static int	ft_read_line(t_fd_info *fd_info, char **buf)
 static int	ft_find_fd(const int fd, t_fd_info **fd_info, t_list **fds)
 {
 	t_list		*ele;
-	t_list		**head;
 	t_fd_info	fdi;
 
 	if (!fd_info || !fds)
@@ -83,7 +84,7 @@ static int	ft_find_fd(const int fd, t_fd_info **fd_info, t_list **fds)
 	ele = ft_lstnew((void *)(&fdi), sizeof(t_fd_info));
 	if (!ele)
 		return (-1);
-	ft_lstadd(fds, ele);
+	ft_lstadd_back(fds, ele);
 	*fd_info = (t_fd_info *)(ele->content);
 	return (1);
 }
@@ -92,6 +93,7 @@ int	get_next_line(const int fd, char **buf)
 {
 	static t_list	*fd_list = 0;
 	t_fd_info		*fd_info;
+	int				ret;
 
 	if (!buf)
 		return (-1);
@@ -100,7 +102,8 @@ int	get_next_line(const int fd, char **buf)
 		return (-1);
 	*buf = fd_info->buf;
 	fd_info->buf = 0;
-	if (ft_read_line(fd_info, buf) == -1)
-		return (-1);
-	return (0);
+	ret = ft_read_line(fd_info, buf);
+	if (ret == -1 || ret == 0)
+		return (0);
+	return (1);
 }

@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include "get_next_line.h"
 
 # define MAX_ITERATIONS	8
 
@@ -65,7 +66,7 @@ typedef struct s_var
 
 
 void			ft_skipspaces(char **inp);
-void			ft_valid(char ch);
+int				ft_valid(char ch);
 int				ft_parse_inp_move(char **inp);
 void			ft_parse_num(char **inp, double *coff, int8_t is_minus);
 #endif

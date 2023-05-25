@@ -24,7 +24,7 @@ void	ft_skipspaces(char **inp)
 	*inp = s;
 }
 
-void	ft_valid(char ch)
+int	ft_valid(char ch)
 {
 	if (ch >= 'A' && ch <= 'Z')
 		return (1);

@@ -24,7 +24,6 @@ static void	ft_parse_int(char **inp, double *coff)
 		s += 1;
 	}
 	*inp = s;
-	return (0);
 }
 
 static void	ft_parse_frac(char **inp, double *coff)
@@ -41,7 +40,6 @@ static void	ft_parse_frac(char **inp, double *coff)
 		s += 1;
 	}
 	*inp = s;
-	return (0);
 }
 
 void	ft_parse_num(char **inp, double *coff, int8_t is_minus)
