@@ -43,11 +43,12 @@ typedef struct s_cd
 
 typedef enum e_var_type
 {
-	CV2_POLY = 0,
-	CV2_MATRIX = 1,
-	CV2_FUNC = 2,
-	CV2_COMPLEX = 3,
-	CV2_RATIONAL = 4
+	CV2_NONE = 0,
+	CV2_POLY = 1,
+	CV2_MATRIX = 2,
+	CV2_FUNC = 3,
+	CV2_COMPLEX = 4,
+	CV2_RATIONAL = 5
 }				t_var_type;
 
 typedef union u_vars

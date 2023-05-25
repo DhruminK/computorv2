@@ -32,6 +32,10 @@ int	ft_valid(char ch)
 		return (2);
 	else if (ch >= '0' && ch <= '9')
 		return (3);
+	else if (ch == '(')
+		return (9);
+	else if (ch == ')')
+		return (10);
 	else if (ch == '+')
 		return (4);
 	else if (ch == '-')
