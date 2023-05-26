@@ -32,10 +32,6 @@ int	ft_valid(char ch)
 		return (2);
 	else if (ch >= '0' && ch <= '9')
 		return (3);
-	else if (ch == '(')
-		return (9);
-	else if (ch == ')')
-		return (10);
 	else if (ch == '+')
 		return (4);
 	else if (ch == '-')
@@ -46,6 +42,10 @@ int	ft_valid(char ch)
 		return (7);
 	else if (ch == '^')
 		return (8);
+	else if (ch == '(')
+		return (9);
+	else if (ch == ')')
+		return (10);
 	return (0);
 }
 
@@ -60,4 +60,24 @@ int	ft_parse_inp_move(char **inp)
 	if (ret != 1 && ret != 2 && ret != 3 && ret != 0 && ret != 5)
 		(*inp) += 1;
 	return (ret);
+}
+
+void	ft_parse_name(char **inp, char **var_name)
+{
+	char	*s;
+	int		val;
+
+	if (!inp || !var_name)
+		return ;
+	*var_name = 0;
+	val = ft_valid(*(*inp));
+	if (val != 1 || val != 2)
+		return ;
+	s = *inp;
+	while (s && *s && (val == 1 || val == 2 || val == 3))
+		val = ft_valid(*(s++));
+	*var_name = strndup(*inp, s - (*inp) + 1);
+	if (!(*var_name))
+		return ;
+	*inp = s;
 }
