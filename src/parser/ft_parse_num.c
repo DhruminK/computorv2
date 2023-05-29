@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:24:04 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/22 18:03:13 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/05/29 16:46:24 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,22 @@ void	ft_parse_num(char **inp, double *coff, int8_t is_minus)
 		ft_parse_frac(inp, coff);
 	}
 	*coff *= is_minus;
+}
+
+int	ft_parse_num_str(char **inp, t_var *var)
+{
+	int	ret;
+	int	is_minus;
+
+	if (!inp || !var || ft_poly_init(&(var->choice.poly), 0, 0) == -1)
+		return (-1);
+	is_minus = 0;
+	if (*(*inp) == '-')
+	{
+		is_minus = 1;
+		(*inp) += 1;
+	}
+	var->type = CV2_RATIONAL;
+	ft_parse_num(inp, &(var->choice.poly.coff->real), is_minus);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:13 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/23 16:40:00 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/05/29 15:39:12 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ void				ft_lstadd_front(t_list **head, t_list *ele);
 t_list				*ft_lstnew(void const *content, size_t size);
 t_list				*ft_lstrm_back_ptr(t_list **head);
 t_list				*ft_lstrm_front_ptr(t_list **head);
-
-int					ft_stack_push(t_list **stack, t_stack_type s_type, void *ptr);
-int					ft_stack_pop(t_list **stack, t_stack **s);
-int					ft_stack_top(t_list *stack, t_stack *s);
-int					ft_stack_len(t_list *stack);
 
 int					get_next_line(const int fd, char **buf);
 

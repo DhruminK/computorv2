@@ -1,48 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_stack_helper.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/29 15:31:03 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/05/29 15:36:59 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
-int	ft_stack_push(t_list **stack, t_stack_type type, void *ptr)
+int	ft_stack_push(t_list **stack, t_var *var)
 {
-	t_stack	s;
 	t_list	*ele;
 
-	if (!stack || !ptr)
+	if (!stack || !var)
 		return (-1);
-	s.s_type = type;
-	if (type == STACK_OP)
-		s.vars.ch = *((char *)ptr);
-	else if (type == STACK_NUM)
-		s.vars.poly = (t_poly *)ptr;
-	else
-		s.vars.str = (char *)ptr;
-	ele = ft_lstnew((void *)&s, sizeof(t_stack));
+	ele = ft_lstnew(var, sizeof(t_var));
 	if (!ele)
 		return (-1);
 	ft_lstadd_front(stack, ele);
 	return (0);
 }
 
-int	ft_stack_pop(t_list **stack, t_stack **s)
+int	ft_stack_pop(t_list **stack, t_var **var)
 {
 	t_list	*ele;
 
-	if (!stack || !s)
+	if (!stack || !var)
 		return (-1);
-	ele = ft_lstrm_front_ptr(stack);
-	if (!ele)
+	if (!*stack)
 		return (0);
-	*s = (t_stack *)(ele->content);
-	memset(ele, 0, sizeof(t_list));
+	ele = (*stack);
+	(*stack) = (*stack)->next;
+	*var = (t_var *)(ele->content);
 	free(ele);
+	ele = 0;
 	return (1);
 }
 
-int	ft_stack_top(t_list *stack, t_stack *s)
+int	ft_stack_top(t_list *stack, t_var *var)
 {
-	if (!s)
+	if (!var)
 		return (-1);
 	if (!stack)
 		return (0);
-	memcpy(s, stack->content, sizeof(t_stack));
+	memcpy(var, stack->content, sizeof(t_var));
 	return (1);
 }
 
@@ -50,8 +55,6 @@ int	ft_stack_len(t_list *stack)
 {
 	int	len;
 
-	if (!stack)
-		return (-1);
 	len = 0;
 	while (stack)
 	{
@@ -59,31 +62,4 @@ int	ft_stack_len(t_list *stack)
 		stack = stack->next;
 	}
 	return (len);
-}
-
-void	ft_free_stack(t_list **stack)
-{
-	t_stack	*s;
-	t_list	*ele;
-	t_list	*next;
-
-	if (!stack)
-		return ;
-	ele = *stack;
-	while (ele)
-	{
-		s = (t_stack *)(ele->content);
-		if (s && s->s_type == STACK_NUM && s->vars.poly)
-		{
-			ft_poly_free(s->vars.poly);
-			free(s->vars.poly);
-		}
-		else if (s && s->stype == STACK_VAR)
-			free(s->vars.str);
-		if (s)
-			free(s);
-		next = ele->next;
-		free(ele);
-		ele = next;
-	}
 }
