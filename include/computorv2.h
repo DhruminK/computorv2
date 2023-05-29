@@ -34,8 +34,6 @@ typedef struct s_poly
 	char		*name;
 	int8_t		degree;
 	t_cd		*coff;
-	int8_t		neg_degree;
-	t_cd		*neg_coff;
 }				t_poly;
 
 typedef struct s_matrix
@@ -68,6 +66,26 @@ typedef struct s_var
 	t_vars		choice;
 }				t_var;
 
+/********* STACK VARIABLES ************/
+typedef enum e_stack_type
+{
+	STACK_OP = 0,
+	STACK_NUM = 1,
+	STACK_VAR = 2
+}					t_stack_type;
+
+typedef union u_stack_vars
+{
+	char			ch;
+	t_poly			*poly;
+	char			*str;
+}					t_stack_vars;
+
+typedef struct s_stack
+{
+	t_stack_type	s_type;
+	t_stack_vars	vars;
+}					t_stack;
 
 void			ft_skipspaces(char **inp);
 int				ft_valid(char ch);
@@ -82,7 +100,18 @@ void			ft_cd_mult(t_cd *out, t_cd c1, t_cd c2);
 int				ft_cd_div(t_cd *out, t_cd c1, t_cd c2);
 int				ft_cd_pow(t_cd *out, t_cd c, int pow);
 
-int				ft_fund_realloc_degree(t_poly *poly, t_poly *out);
+int				ft_find_realloc_degree(t_poly *poly, t_poly *out);
 int				ft_solve_func(t_var *var, t_cd inp,
 					t_poly *out, uint8_t is_num);
+
+int				ft_perform_op(double *out, double num1, double num2, char op);
+int				ft_process_var_stack(t_list **var, char op);
+
+int				ft_op_precedence(char op);
+int				ft_process_new_op(t_list **vars, t_list **ops, char op);
+
+int				ft_process_op(t_list **vars, t_list **ops, uint8_t cbrac);
+int				ft_parse_op(t_list **vars, t_list **ops, char ch);
+
+int				ft_parse_assign(char **inp, char *var_name, t_poly *poly);
 #endif

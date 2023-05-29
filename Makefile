@@ -2,15 +2,15 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = computorv2
 
-PARSER = ft_parse_helper.c ft_parse_num.c
+#PARSER = ft_parse_helper.c ft_parse_num.c
 GNL = get_next_line.c
-HELPER = ft_lst_helper_func.c
+HELPER = ft_lst_helper.c
 MAIN = computorv2.c
 
 SRC = $(PARSER) $(GNL) $(HELPER) $(MAIN)
 OBJ = $(SRC:.c=.o)
 
-INC = computorv2.h
+INC = computorv2.h get_next_line.h
 INCLUDES = -I include/
 
 SRC_PATH = src/

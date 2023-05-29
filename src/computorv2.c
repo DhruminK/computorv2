@@ -13,6 +13,7 @@ int		main(int ac, char **av)
 	{
 		buf = 0;
 		ret = get_next_line(0, &buf);
+		printf("RET : %d\n", ret);
 		if (ret == -1 || ret == 0)
 			return (0);
 		printf("BUFFER : %s\n", buf);

@@ -1,0 +1,70 @@
+#include "computorv2.h"
+
+void	ft_skipspaces(char **inp)
+{
+	char	*s;
+
+	if (!inp)
+		return ;
+	s = *inp;
+	while (s && *s && (*s == ' '
+				|| (*s >= 9 && *s <= 13)))
+		s += 1;
+	*inp = s;
+}
+
+int	ft_valid(char ch)
+{
+	if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
+		return (1);
+	else if (ch >= '0' && ch <= '9')
+		return (2);
+	else if (ch == '+')
+		return (3);
+	else if (ch == '-')
+		return (4);
+	else if (ch == '*')
+		return (5);
+	else if (ch == '/')
+		return (6);
+	else if (ch == '=')
+		return (7);
+	else if (ch == '^')
+		return (8);
+	else if (ch == '(')
+		return (9);
+	else if (ch == ')')
+		return (10);
+	return (0);
+}
+
+int	ft_parse_inp_move(char **inp)
+{
+	int	ret;
+
+	if (!inp || !*inp)
+		return (0);
+	ft_skipspaces(inp);
+	ret = ft_valid(*(*inp));
+	return (ret);
+}
+
+void	ft_parse_name(char **inp, char **var_name)
+{
+	char	*s;
+	int		val;
+
+	if (!inp || !var_name)
+		return ;
+	*var_name = 0;
+	val = ft_valid(*(*inp));
+	if (val != 1)
+		return ;
+	s = *inp;
+	while (s && *s && (val == 1 || val == 2))
+		val = ft_valid(*(s++));
+	*var_name = strndup(*inp, s - (*inp) + 1);
+	if (!(*var_name))
+		return ;
+	*inp = s;
+}
