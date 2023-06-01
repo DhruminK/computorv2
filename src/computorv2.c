@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 17:13:12 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/29 17:13:21 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/01 16:03:42 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(void)
 	{
 		buf = 0;
 		printf("> ");
+		fflush(stdout);
 		ret = get_next_line(0, &buf);
 		if (ret < 1)
 			return (1);

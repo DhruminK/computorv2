@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:08:29 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/29 18:21:20 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:11:31 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ double	ft_newton_root(t_poly *p, t_poly *p_prime)
 	return (xn);
 }
 
-double	ft_rt(double num, int8_t pow)
+double	ft_rt(double num, int pow)
 {
 	t_poly	p;
 	t_poly	p_prime;

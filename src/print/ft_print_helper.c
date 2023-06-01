@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_helper.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/01 16:07:09 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/01 17:02:50 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 void	ft_print_complex(t_cd *c, uint8_t in_poly)
@@ -18,9 +30,9 @@ void	ft_print_complex(t_cd *c, uint8_t in_poly)
 		printf("(");
 	printf("%0.3f", mult * c->real);
 	if (c->imag * mult < 0.0)
-		printf("- %0.3f", c->imag);
-	else
-		printf("+ %0.3f", c->imag * mult);
+		printf("- %0.3fi", c->imag);
+	else if (c->imag * mult > 0.0)
+		printf("+ %0.3fi", c->imag * mult);
 	if (in_poly && c->imag != 0.0)
 		printf(")");
 }
@@ -69,9 +81,13 @@ void	ft_print_var(t_var *v)
 	if (v->type == CV2_MATRIX)
 		return (ft_print_matrix(&(v->choice.matrix)));
 	else if (v->type == CV2_RATIONAL || v->type == CV2_COMPLEX)
-		return (ft_print_complex(v->choice.poly.coff, 0));
+	{
+		ft_print_complex(v->choice.poly.coff, 0);
+		printf("\n");
+		return ;
+	}
 	else if (v->type == CV2_OP || v->type == CV2_NONE)
-		printf("This should not be printed\n");
+		printf("This should not be printed: %c\n", v->choice.ch);
 	else
 		return (ft_print_poly(&(v->choice.poly)));
 }

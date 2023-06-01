@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:32:59 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/09 16:59:38 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/01 18:56:22 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ double	ft_pow(double val, int n)
 void	ft_frac(double n, long *numr, long *deno)
 {
 	double	frac;
+	double	integer;
 
 	if (!numr || !deno)
 		return ;
@@ -48,14 +49,17 @@ void	ft_frac(double n, long *numr, long *deno)
 	if (n == 0.0)
 		return ;
 	frac = n - (long)n;
+	integer = (n - frac);
 	while (frac != 0.0)
 	{
 		(*deno) *= 10;
 		frac *= 10;
-		(*numr) = ((*numr) * 10) + (frac - (long)frac);
+		integer = (frac) - (frac - (long)frac);
+		(*numr) = ((*numr) * 10) + integer;
 		frac = frac - (long)frac;
 	}
-	(*numr) += (long)(n - (long)n) * (*deno);
+	integer = n - (n - (long)n);
+	(*numr) += ((long)integer) * (*deno);
 }
 
 double	ft_gen_pow(double val, double pow)

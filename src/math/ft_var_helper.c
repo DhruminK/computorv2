@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_var_helper.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/01 16:04:53 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/01 16:05:06 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 int	ft_matrix_cpy(t_matrix *dst, t_matrix *src)
@@ -12,7 +24,7 @@ int	ft_matrix_cpy(t_matrix *dst, t_matrix *src)
 	while (m < dst->m)
 	{
 		memcpy(dst->matrix[m],
-				src->matrix[m], sizeof(t_cd) * dst->n);
+			src->matrix[m], sizeof(t_cd) * dst->n);
 		m += 1;
 	}
 	return (0);
@@ -30,7 +42,7 @@ int	ft_var_cpy_no_name(t_var *dst, t_var *src)
 	if (dst->type == CV2_MATRIX)
 		ret = ft_matrix_cpy(&(dst->choice.matrix), &(src->choice.matrix));
 	else if (dst->type != CV2_MATRIX && dst->type != CV2_NONE
-			&& dst->type != CV2_OP)
+		&& dst->type != CV2_OP)
 		ret = ft_poly_cpy(&(dst->choice.poly), &(src->choice.poly));
 	else
 		memcpy(&(dst->choice), &(src->choice), sizeof(t_vars));

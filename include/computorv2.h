@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:08:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/29 17:35:15 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/01 18:57:16 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_cd
 	double		real;
 	double		imag;
 }				t_cd;
-
 
 typedef struct s_poly
 {
@@ -67,6 +66,13 @@ typedef struct s_var
 	t_vars		choice;
 }				t_var;
 
+typedef struct s_poly_op
+{
+	t_list		*stack_vars;
+	t_list		*stack_op;
+	t_var_type	prev_type;
+}				t_poly_op;
+
 void			ft_skipspaces(char **inp);
 int				ft_valid(char ch);
 int				ft_parse_inp_move(char **inp);
@@ -78,7 +84,7 @@ int				ft_var_op(t_var *out, t_var *v1, t_var *v2, char op);
 int				ft_var_cpy_no_name(t_var *dst, t_var *src);
 
 double			ft_newton_root(t_poly *p, t_poly *p_prime);
-double			ft_rt(double num, int8_t pow);
+double			ft_rt(double num, int pow);
 double			ft_get_val_x(double x, t_poly *poly);
 double			ft_pow(double val, int n);
 double			ft_gen_pow(double val, double pow);
@@ -107,20 +113,24 @@ void			ft_stack_free(t_list **stack);
 
 void			ft_matrix_free(t_matrix *matrix);
 int				ft_matrix_init(t_matrix *matrix, uint32_t m, uint32_t n);
-int				ft_matrix_add(t_matrix *out, t_matrix *m1, t_matrix *m2, uint8_t sub);
-int				ft_matrix_scalar_mult(t_matrix *out, t_matrix *m1, double num);
+int				ft_matrix_add(t_matrix *out, t_matrix *m1,
+					t_matrix *m2, uint8_t sub);
+int				ft_matrix_scalar_mult(t_matrix *out,
+					t_matrix *m1, double num);
 int				ft_matrix_mult(t_matrix *out, t_matrix *m1, t_matrix *m2);
 
 void			ft_print_complex(t_cd *c, uint8_t in_poly);
 void			ft_print_poly(t_poly *poly);
 void			ft_print_matrix(t_matrix *matrix);
 void			ft_print_var(t_var *v);
-
+void			ft_stack_print(t_list *v);
 
 int				ft_parse_num_str(char **inp, double num, t_list **stack_vars);
 
-int				ft_process_stack(t_list **stack_vars, t_list **stack_op, uint8_t cbrac);
-int				ft_process_stack_add(t_list **stack_vars, t_list **stack_op, char op);
+int				ft_process_stack(t_list **stack_vars,
+					t_list **stack_op, uint8_t cbrac);
+int				ft_process_stack_add(t_list **stack_vars,
+					t_list **stack_op, char op);
 int				ft_parse_poly(char **inp, t_list *vars, t_var *new_v);
 int				ft_parse_var(char **inp, t_list *vars, t_list **stack_vars);
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_op.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/01 16:06:13 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/01 19:11:13 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 static int	ft_free_stack_vars(t_var **v1, t_var **v2, t_var **op, int ret)
@@ -82,7 +94,7 @@ int	ft_process_stack_add(t_list **stack_vars, t_list **stack_op, char op)
 	if (op == ')')
 		return (ft_process_stack(stack_vars, stack_op, 1));
 	pr_op = ft_op_precedence(op);
-	while (*stack_op)
+	while (*stack_op && op != '(')
 	{
 		ft_stack_top(*stack_op, &v);
 		pr = ft_op_precedence(v.choice.ch);

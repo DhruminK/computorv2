@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:24:04 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/29 16:46:24 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/01 16:52:20 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_parse_int(char **inp, double *coff)
 
 	*coff = 0;
 	s = *inp;
-	while (ft_valid(*s) == 3)
+	while (ft_valid(*s) == 2)
 	{
 		*coff = ((*coff) * 10) + (*s - '0');
 		s += 1;
@@ -33,9 +33,9 @@ static void	ft_parse_frac(char **inp, double *coff)
 
 	s = *inp;
 	num = 0.1;
-	while (ft_valid(*s) == 3)
+	while (ft_valid(*s) == 2)
 	{
-		*coff += ((*s - 0) / num);
+		*coff += ((*s - '0') * num);
 		num *= 0.1;
 		s += 1;
 	}
