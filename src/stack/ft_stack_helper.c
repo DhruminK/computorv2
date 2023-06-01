@@ -63,3 +63,23 @@ int	ft_stack_len(t_list *stack)
 	}
 	return (len);
 }
+
+void	ft_stack_free(t_list **stack)
+{
+	t_var	*var;
+	int		ret;
+
+	if (!stack)
+		return ;
+	ret = 1;
+	var = 0;
+	while (ret > 0)
+	{
+		ret = ft_stack_pop(stack, &var);
+		if (ret < 1)
+			break ;
+		ft_var_free(var);
+		free(var);
+		var = 0;
+	}
+}

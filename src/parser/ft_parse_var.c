@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_parse_var.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 16:32:37 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/29 17:12:51 by dkhatri          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "computorv2.h"
 
-static int	ft_parse_var_name(char **inp, char **var_name)
+static int	ft_process_var_name(char **inp, char **var_name)
 {
 	char	*s;
 	int		ret;
@@ -32,54 +20,60 @@ static int	ft_parse_var_name(char **inp, char **var_name)
 	return (1);
 }
 
-static void	ft_find_var(t_list *vars, t_list **nv, char *var_name)
+static void	ft_find_var(t_list *vars, t_var **nv, char *var_name)
 {
-	t_list	*ele;
-
-	if (!var || !nv)
+	if (!vars || !nv || !var_name)
 		return ;
 	*nv = 0;
-	ele = *vars;
-	while (ele)
+	while (vars)
 	{
-		*nv = (t_var *)(ele->content);
+		*nv = (t_var *)(vars->content);
 		if (strcasecmp((*nv)->var_name, var_name) == 0)
 			return ;
-		ele = ele->next;
+		vars = vars->next;
 	}
 	*nv = 0;
 }
 
-static int	ft_parse_init_out(t_var *v, t_var *out)
+static int	ft_push_var_to_stack(t_list **stack_vars, t_var *var, uint8_t i)
 {
-	if (!out)
+	t_var	v;
+
+	if (!stack_vars)
 		return (-1);
-	if (!v)
-		return (ft_var_poly_init(out, CV2_RATIONAL, 0, 0));
-	if (v->type == CV2_COMPLEX || v->type == CV2_RATIONAL)
-	{
-		if (ft_var_poly_init(out, v->type, 0, 0) == -1)
-			return (-1);
-		memcpy(out->choice.poly.coff, v->choice.poly.coff,
-			sizeof(t_cd) * out->choice.poly.degree);
+	v.type = CV2_RATIONAL;
+	if (i)
+		v.type = CV2_COMPLEX;
+	if ((i || !var) && ft_poly_init(&(v.choice.poly), 0, 0) == -1)
+		return (-1);
+	if (var && ft_var_cpy_no_name(&v, var) == -1)
+		return (-1);
+	if (ft_stack_push(stack_vars, &v) == 0)
 		return (0);
-	}
+	ft_var_free(&v);
+	return (-1);
 }
 
-int	ft_parse_var(char **inp, t_list *vars, t_var *out)
+int	ft_parse_var(char **inp, t_list *vars, t_list **stack_vars)
 {
-	char	*var_name;
-	t_var	*v;
 	int		ret;
+	uint8_t	i;
+	t_var	*v1;
+	char	*var_name;
 
-	if (!inp || !vars || !out)
+	if (!inp || !vars || !stack_vars)
 		return (-1);
-	*v = 0;
-	ret = ft_parse_var_name(inp, &var_name);
+	ret = ft_process_var_name(inp, &(var_name));
 	if (ret < 1)
 		return (-1);
-	ft_find_var(vars, &v, var_name);
-	ret = ft_parse_init_out(v, out);
-	free(var_name);
-	return (ret);
+	i = 0;
+	v1 = 0;
+	if (strcasecmp(var_name, "i") == 0)
+		i = 1;
+	if (!i)
+		ft_find_var(vars, &v1, var_name);
+	ret = ft_push_var_to_stack(stack_vars, v1, i);
+	if (var_name)
+		free(var_name);
+	return (0);
 }

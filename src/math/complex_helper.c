@@ -56,8 +56,7 @@ int	ft_cd_div(t_cd *out, t_cd c1, t_cd c2)
 		return (-1);
 	c.real = c2.real / abs;
 	c.imag = -1 * c2.imag / abs;
-	*out = ft_cd_mult(c1, c);
-	return (0);
+	return (ft_cd_mult(out, c1, c));
 }
 
 int	ft_cd_pow(t_cd *out, t_cd c, int pow)
@@ -67,8 +66,8 @@ int	ft_cd_pow(t_cd *out, t_cd c, int pow)
 
 	if (!out)
 		return (-1);
-	out.real = 1.0;
-	out.imag = 0.0;
+	out->real = 1.0;
+	out->imag = 0.0;
 	if (pow == 0)
 		return (0);
 	div = 1;

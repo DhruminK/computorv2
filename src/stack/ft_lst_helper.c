@@ -72,7 +72,7 @@ t_list	*ft_lstrm_back_ptr(t_list **head)
 	if (!head || !*head)
 		return (0);
 	if (!((*head)->next))
-		return (ft_lstrm_front(head));
+		return (ft_lstrm_front_ptr(head));
 	ele = *head;
 	prev = 0;
 	while (ele->next)

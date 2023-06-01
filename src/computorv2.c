@@ -10,25 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "computorv2.h"
 
-int	main(int ac, char **av)
+static int	ft_process_line(char *buf, t_list **vars)
 {
-	int		ret;
-	char	*buf;
+	t_var	v;
+	char	*inp;
 
-	ret = 1;
-	(void)ac;
-	(void)av;
-	while (ret)
+	if (!buf)
+		return (-1);
+	memset(&v, 0, sizeof(t_var));
+	inp = buf;
+	if (ft_parse_poly(&inp, *vars, &v) == -1)
+		return (-1);
+	ft_print_var(&v);
+	ft_var_free(&v);
+	return (0);
+}
+
+int	main(void)
+{
+	char	*buf;
+	t_list	*vars;
+	int		ret;
+
+	vars = 0;
+	while (1)
 	{
 		buf = 0;
+		printf("> ");
 		ret = get_next_line(0, &buf);
-		printf("RET : %d\n", ret);
-		if (ret == -1 || ret == 0)
-			return (0);
-		printf("BUFFER : %s\n", buf);
+		if (ret < 1)
+			return (1);
+		if (ft_process_line(buf, &vars) == -1)
+			return (1);
+		free(buf);
 	}
 	return (0);
 }

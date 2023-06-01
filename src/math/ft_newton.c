@@ -20,7 +20,7 @@ double	ft_get_val_x(double x, t_poly *poly)
 	val = 0;
 	i = -1;
 	while (++i <= poly->degree)
-		val += (poly->coff[i]) * (ft_pow(x, i));
+		val += (poly->coff[i].real) * (ft_pow(x, i));
 	return (val);
 }
 
@@ -32,7 +32,7 @@ double	ft_newton_root(t_poly *p, t_poly *p_prime)
 	double	val_prime_x;
 	int		i;
 
-	xn1 = p->coff[0];
+	xn1 = p->coff[0].real;
 	if (xn1 < 0)
 		xn1 *= -1;
 	i = -1;
@@ -56,7 +56,7 @@ double	ft_rt(double num, int8_t pow)
 
 	if (pow < 0)
 		return (-1);
-	if (!num || (num == 1))
+	if (!num || (num == 1) || pow == 1)
 		return (num);
 	if (pow == 0)
 		return (1);
@@ -64,9 +64,9 @@ double	ft_rt(double num, int8_t pow)
 		return (-1);
 	if (ft_poly_init(&p_prime, pow - 1, 0) == -1)
 		return (-1);
-	p.coff[pow] = 1;
-	p.coff[0] = -1 * num;
-	p_prime.coff[pow - 1] = pow;
+	p.coff[pow].real = 1;
+	p.coff[0].real = -1 * num;
+	p_prime.coff[pow - 1].real = pow;
 	val = ft_newton_root(&p, &p_prime);
 	ft_poly_free(&p);
 	ft_poly_free(&p_prime);

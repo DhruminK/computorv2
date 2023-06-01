@@ -65,12 +65,7 @@ int	ft_poly_add(t_poly *out, t_poly *p1, t_poly *p2, uint8_t sub)
 	memcpy(out->coff, p1->coff, sizeof(t_cd) * (p1->degree + 1));
 	i = -1;
 	while (++i <= p2->degree)
-	{
-		if (sub)
-			ft_cd_sub(out->coff + i, out->coff[i], p2->coff[i]);
-		else
-			ft_cd_add(out->coff + i, out->coff[i], p2->coff[i]);
-	}
+		ft_cd_add(out->coff + i, out->coff[i], p2->coff[i], sub);
 	return (0);
 }
 
@@ -92,7 +87,7 @@ int	ft_poly_mult(t_poly *out, t_poly *p1, t_poly *p2)
 		while (++j <= p2->degree)
 		{
 			ft_cd_mult(&c, p1->coff[i], p2->coff[j]);
-			ft_cd_add(out->coff + i + j, out->coff[i + j], c);
+			ft_cd_add(out->coff + i + j, out->coff[i + j], c, 0);
 		}
 	}
 	return (0);

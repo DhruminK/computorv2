@@ -23,7 +23,7 @@ void	ft_matrix_free(t_matrix *matrix)
 	i = 0;
 	while (i < matrix->m)
 	{
-		if (matrix->m[i])
+		if (matrix->matrix[i])
 			free(matrix->matrix[i]);
 	}
 	free(matrix->matrix);
@@ -63,7 +63,7 @@ int	ft_matrix_add(t_matrix *out, t_matrix *m1, t_matrix *m2, uint8_t sub)
 		return (-1);
 	if (m1->m != m2->m || m1->n != m2->n)
 		return (-1);
-	if (ft_matrix_init(out, ml->m, m1->n) == -1)
+	if (ft_matrix_init(out, m1->m, m1->n) == -1)
 		return (-1);
 	i = -1;
 	while (++i < out->m)
@@ -120,7 +120,7 @@ int	ft_matrix_mult(t_matrix *out, t_matrix *m1, t_matrix *m2)
 			while (++k < m1->n)
 			{
 				ft_cd_mult(&c, m1->matrix[i][k], m2->matrix[k][j]);
-				ft_cd_add(out->matrix[i] + j, out->matrix[i][j], c);
+				ft_cd_add(out->matrix[i] + j, out->matrix[i][j], c, 0);
 			}
 		}
 	}

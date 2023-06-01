@@ -65,20 +65,29 @@ void	ft_parse_num(char **inp, double *coff, int8_t is_minus)
 	*coff *= is_minus;
 }
 
-int	ft_parse_num_str(char **inp, t_var *var)
+int	ft_parse_num_str(char **inp, double num, t_list **stack_vars)
 {
-	int	ret;
-	int	is_minus;
+	int		ret;
+	int		is_minus;
+	t_var	var;
 
-	if (!inp || !var || ft_poly_init(&(var->choice.poly), 0, 0) == -1)
+	if (!stack_vars || ft_poly_init(&(var.choice.poly), 0, 0) == -1)
 		return (-1);
 	is_minus = 0;
-	if (*(*inp) == '-')
+	var.type = CV2_RATIONAL;
+	if (!inp)
+		var.choice.poly.coff->real = num;
+	else
 	{
-		is_minus = 1;
-		(*inp) += 1;
+		if (*(*inp) == '-')
+		{
+			is_minus = 1;
+			(*inp) += 1;
+		}
+		ft_parse_num(inp, &(var.choice.poly.coff->real), is_minus);
 	}
-	var->type = CV2_RATIONAL;
-	ft_parse_num(inp, &(var->choice.poly.coff->real), is_minus);
-	return (0);
+	ret = ft_stack_push(stack_vars, &var);
+	if (ret == -1)
+		ft_poly_free(&(var.choice.poly));
+	return (ret);
 }
