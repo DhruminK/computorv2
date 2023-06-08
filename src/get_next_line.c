@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:28 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/23 17:59:31 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/06 13:40:27 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	ft_read_line(t_fd_info *fd_info, char **buf)
 		index = ft_merge_two_buff(buf, buf2, ret);
 		if (index == -1 || index == ret - 1)
 			return (index);
+		if (index == ret && ret != BUFF_SIZE)
+			return (0);
 		if (index >= ret)
 			continue ;
 		fd_info->buf = strndup(buf2 + index + 1, ret - index);

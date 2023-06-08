@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:08:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/01 18:57:16 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:27:59 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <signal.h>
 # include "get_next_line.h"
 
-# define MAX_ITERATIONS	8
+# define MAX_ITERATIONS	20
 
 typedef struct s_cd
 {
@@ -83,12 +84,11 @@ void			ft_var_free(t_var *var);
 int				ft_var_op(t_var *out, t_var *v1, t_var *v2, char op);
 int				ft_var_cpy_no_name(t_var *dst, t_var *src);
 
-double			ft_newton_root(t_poly *p, t_poly *p_prime);
-double			ft_rt(double num, int pow);
-double			ft_get_val_x(double x, t_poly *poly);
 double			ft_pow(double val, int n);
-double			ft_gen_pow(double val, double pow);
-void			ft_frac(double n, long *numr, long *deno);
+long			ft_gcd(long a, long b);
+int				ft_newton(double val, uint16_t pow, double *out);
+int				ft_gen_pow(double val, double pow, double *out);
+void			ft_gen_frac(double num, long *numr, long *deno);
 
 void			ft_cd_init(t_cd *out, double real, double imag);
 int				ft_cd_scalar_mult(t_cd *out, double num, t_cd c);
@@ -133,6 +133,9 @@ int				ft_process_stack_add(t_list **stack_vars,
 					t_list **stack_op, char op);
 int				ft_parse_poly(char **inp, t_list *vars, t_var *new_v);
 int				ft_parse_var(char **inp, t_list *vars, t_list **stack_vars);
+int				ft_parse_type(char *inp);
 
 int				ft_op_precedence(char op);
+
+void			ft_sigint_recv(int signo);
 #endif

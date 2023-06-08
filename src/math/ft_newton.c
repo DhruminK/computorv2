@@ -5,70 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 15:08:29 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/01 19:11:31 by dkhatri          ###   ########.fr       */
+/*   Created: 2023/06/06 15:35:21 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/08 15:17:34 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computorv2.h"
 
-double	ft_get_val_x(double x, t_poly *poly)
+int	ft_newton(double val, uint16_t pow, double *out)
 {
-	int		i;
-	double	val;
-
-	val = 0;
-	i = -1;
-	while (++i <= poly->degree)
-		val += (poly->coff[i].real) * (ft_pow(x, i));
-	return (val);
-}
-
-double	ft_newton_root(t_poly *p, t_poly *p_prime)
-{
-	double	xn1;
+	double	f;
+	double	fp;
 	double	xn;
-	double	val_x;
-	double	val_prime_x;
-	int		i;
+	int8_t	i;
 
-	xn1 = p->coff[0].real;
-	if (xn1 < 0)
-		xn1 *= -1;
+	if (!out || val < 0.0)
+		return (-1);
+	if (pow == 1)
+		return (val);
+	xn = val;
 	i = -1;
 	while (++i < MAX_ITERATIONS)
 	{
-		val_x = ft_get_val_x(xn1, p);
-		val_prime_x = ft_get_val_x(xn1, p_prime);
-		if (val_x == val_prime_x || val_prime_x == 0)
-			break ;
-		xn = xn1 - (val_x / val_prime_x);
-		xn1 = xn;
+		f = ft_pow(xn, pow) - val;
+		fp = pow * (ft_pow(xn, pow - 1));
+		xn = xn - (f / fp);
 	}
-	return (xn);
+	*out = xn;
+	return (0);
 }
 
-double	ft_rt(double num, int pow)
+int	ft_gen_pow(double val, double pow, double *out)
 {
-	t_poly	p;
-	t_poly	p_prime;
-	double	val;
+	long	numr;
+	long	deno;
+	double	root;
 
-	if (pow < 0)
+	if (!out)
 		return (-1);
-	if (!num || (num == 1) || pow == 1)
-		return (num);
-	if (pow == 0)
-		return (1);
-	if (ft_poly_init(&p, pow, 0) == -1)
+	ft_gen_frac(pow, &numr, &deno);
+	*out = ft_pow(val, numr);
+	if (deno > 1 && numr < 0)
 		return (-1);
-	if (ft_poly_init(&p_prime, pow - 1, 0) == -1)
+	if (deno > 1 && ft_newton(val, (uint16_t)deno, &root) == -1)
 		return (-1);
-	p.coff[pow].real = 1;
-	p.coff[0].real = -1 * num;
-	p_prime.coff[pow - 1].real = pow;
-	val = ft_newton_root(&p, &p_prime);
-	ft_poly_free(&p);
-	ft_poly_free(&p_prime);
-	return (val);
+	if (numr != 1 && deno > 1)
+		*out = *out * root;
+	else if (deno > 1)
+		*out = root;
+	return (0);
 }

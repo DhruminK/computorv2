@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 14:55:17 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/29 14:56:14 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/08 15:13:00 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ int	ft_poly_pow(t_poly *out, t_poly *p1, t_poly *p2)
 	c.imag = 0.0;
 	if (p1->coff->imag != 0.0 && ft_complex_poly_pow(&c, p1, p2) == -1)
 		return (-1);
-	else if (p1->coff->imag == 0.0)
-		c.real = ft_gen_pow(p1->coff->real, p2->coff->real);
+	else if (p1->coff->imag == 0.0 && ft_gen_pow(p1->coff->real,
+			p2->coff->real, &(c.real)) == -1)
+		return (-1);
 	if (ft_poly_init(out, out->degree, 0) == -1)
 		return (-1);
 	memcpy(out->coff, &c, sizeof(t_cd));

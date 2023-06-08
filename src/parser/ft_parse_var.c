@@ -6,13 +6,13 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:06:58 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/01 16:06:59 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:33:03 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computorv2.h"
 
-static int	ft_process_var_name(char **inp, char **var_name)
+int	ft_process_var_name(char **inp, char **var_name)
 {
 	char	*s;
 	int		ret;
@@ -73,7 +73,7 @@ int	ft_parse_var(char **inp, t_list *vars, t_list **stack_vars)
 	t_var	*v1;
 	char	*var_name;
 
-	if (!inp || !vars || !stack_vars)
+	if (!inp || !stack_vars)
 		return (-1);
 	ret = ft_process_var_name(inp, &(var_name));
 	if (ret < 1)
