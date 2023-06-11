@@ -1,30 +1,19 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   computorv2.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 17:13:12 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/06 13:52:58 by dkhatri          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "computorv2.h"
 
-static int	ft_process_line(char *buf, t_list **vars)
+static int	ft_process_line(char *buf, t_list *vars)
 {
-	t_var	v;
-	char	*inp;
+	t_poly_inp	inp;
 
 	if (!buf)
 		return (-1);
-	memset(&v, 0, sizeof(t_var));
-	inp = buf;
-	if (ft_parse_poly(&inp, *vars, &v) == -1)
+	memset(&inp, 0, sizeof(t_poly_inp));
+	inp.vars_avail = vars;
+	inp.inp = buf;
+	inp.end_char = 0;
+	if (ft_parse_poly(&inp) == -1)
 		return (-1);
-	ft_print_var(&v);
-	ft_var_free(&v);
+	ft_print_var(&(inp.out));
+	ft_var_free(&(inp.out));
 	return (0);
 }
 
@@ -39,7 +28,7 @@ static int	ft_get_line(t_list **vars)
 	ret = get_next_line(0, &buf);
 	if (ret == 1 && strcasecmp("quit", buf) == 0)
 		ret = 0;
-	if (ret == 1 && ft_process_line(buf, vars) == -1)
+	if (ret == 1 && ft_process_line(buf, *vars) == -1)
 		ret = -1;
 	if (buf)
 		free(buf);

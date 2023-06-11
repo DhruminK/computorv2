@@ -36,7 +36,7 @@ int	ft_poly_cpy(t_poly *dst, t_poly *src)
 		return (-1);
 	if (ft_poly_init(dst, src->degree, 0) == -1)
 		return (-1);
-	memcpy(dst->coff, src->coff, sizeof(t_cd) * src->degree);
+	memcpy(dst->coff, src->coff, sizeof(t_cd) * (src->degree + 1));
 	return (0);
 }
 

@@ -74,6 +74,15 @@ typedef struct s_poly_op
 	t_var_type	prev_type;
 }				t_poly_op;
 
+typedef struct	s_poly_inp
+{
+	t_list		*vars_avail;
+	t_var		out;
+	char		*inp;
+	char		*var_name;
+	char		end_char;
+}				t_poly_inp;
+
 void			ft_skipspaces(char **inp);
 int				ft_valid(char ch);
 int				ft_parse_inp_move(char **inp);
@@ -127,13 +136,12 @@ void			ft_stack_print(t_list *v);
 
 int				ft_parse_num_str(char **inp, double num, t_list **stack_vars);
 
-int				ft_process_stack(t_list **stack_vars,
-					t_list **stack_op, uint8_t cbrac);
-int				ft_process_stack_add(t_list **stack_vars,
-					t_list **stack_op, char op);
-int				ft_parse_poly(char **inp, t_list *vars, t_var *new_v);
-int				ft_parse_var(char **inp, t_list *vars, t_list **stack_vars);
-int				ft_parse_type(char *inp);
+int				ft_process_stack_op(t_poly_op *poly_op);
+int				ft_empty_op_stack(t_poly_op *poly_op, uint8_t cbrac);
+int				ft_add_op_stack(t_poly_op *poly_op, char op);
+int				ft_parse_op_validate(char op, t_poly_op *poly_op);
+int				ft_parse_op(char **inp, t_poly_op *poly_op);
+int				ft_parse_poly(t_poly_inp *poly_inp);
 
 int				ft_op_precedence(char op);
 

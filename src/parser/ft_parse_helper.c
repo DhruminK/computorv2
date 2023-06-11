@@ -80,3 +80,25 @@ void	ft_parse_name(char **inp, char **var_name)
 		return ;
 	*inp = s;
 }
+
+int	ft_parse_op_validate(char op, t_poly_op *poly_op)
+{
+	int	ret;
+
+	if (!poly_op)
+		return (-1);
+	if (op == '-' && (poly_op->prev_type == CV2_OP
+		|| poly_op->prev_type == CV2_NONE))
+	{
+		ret = ft_parse_num_str(0, -1, &(poly_op->stack_vars));
+		if (ret == 0)
+			ret = ft_add_op_stack(poly_op, '*');
+		if (ret == -1)
+			return (-1);
+		return (1);
+	}
+	if (op == '(' && poly_op->prev_type != CV2_NONE
+		&& poly_op->prev_type != CV2_OP)
+		return (ft_add_op_stack(poly_op, '*'));
+	return (0);
+}
