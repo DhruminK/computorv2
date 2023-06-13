@@ -90,7 +90,8 @@ int	ft_parse_op_validate(char op, t_poly_op *poly_op)
 	if (op == '-' && (poly_op->prev_type == CV2_OP
 		|| poly_op->prev_type == CV2_NONE))
 	{
-		ret = ft_parse_num_str(0, -1, &(poly_op->stack_vars));
+		ret = ft_parse_num_str(0, -1,
+				&(poly_op->stack_vars), &(poly_op->prev_type));
 		if (ret == 0)
 			ret = ft_add_op_stack(poly_op, '*');
 		if (ret == -1)

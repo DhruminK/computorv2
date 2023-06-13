@@ -24,7 +24,7 @@ static int	ft_parse_poly_line(char **inp, char *var_name, t_poly_op *poly_op)
 		return (-1);
 	ret = ft_valid(*(*inp));
 	if (ret == 2)
-		return (ft_parse_num_str(inp, 0, &(poly_op->stack_vars)));
+		return (ft_parse_num_str(inp, 0, &(poly_op->stack_vars), &(poly_op->prev_type)));
 	if (ret == 3 || ret == 4 || ret == 5 || ret == 6
 		|| ret == 8 || ret == 9 || ret == 10)
 		return (ft_parse_op(inp, poly_op));

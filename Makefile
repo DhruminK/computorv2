@@ -10,7 +10,9 @@ HELPER_PATH = helper/
 
 HELPER = ft_var_free.c ft_var_op.c
 MATH = complex_helper.c ft_newton.c ft_var_helper.c math_helper.c \
-	   matrix_helper.c poly_adv_helper.c poly_helper.c ft_gen_frac.c
+	   matrix_helper.c \
+	   ft_poly_helper.c ft_poly_add.c ft_poly_mult.c \
+	   ft_gen_frac.c
 PARSER = ft_parse_helper.c ft_parse_num.c ft_parse_op.c ft_parse_poly.c \
 		 #ft_parse_var.c
 PRINT = ft_print_helper.c ft_print_stack.c

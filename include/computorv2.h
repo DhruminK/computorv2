@@ -28,11 +28,29 @@ typedef struct s_cd
 	double		imag;
 }				t_cd;
 
+/**
 typedef struct s_poly
 {
 	char		*name;
 	int			degree;
 	t_cd		*coff;
+}				t_poly;
+*/
+
+typedef struct s_poly_var
+{
+	double		degree;
+	t_cd		coff;
+}				t_poly_var;
+
+typedef struct s_poly
+{
+	char		*var_name;
+	double		min_degree;
+	double		max_degree;
+	uint8_t		contain_root;
+	int			num_vars;
+	t_list		*coff;
 }				t_poly;
 
 typedef struct s_matrix
@@ -106,7 +124,8 @@ int				ft_cd_mult(t_cd *out, t_cd c1, t_cd c2);
 int				ft_cd_div(t_cd *out, t_cd c1, t_cd c2);
 int				ft_cd_pow(t_cd *out, t_cd c, int pow);
 
-int				ft_poly_init(t_poly *poly, int8_t degree, char *name);
+void			ft_poly_init(t_poly *poly, double degree, char *name);
+int				ft_poly_var_init(t_poly *poly, double degree, t_cd coff);
 int				ft_poly_cpy(t_poly *dst, t_poly *src);
 void			ft_poly_free(t_poly *poly);
 int				ft_poly_add(t_poly *out, t_poly *p1, t_poly *p2, uint8_t sub);
@@ -134,7 +153,7 @@ void			ft_print_matrix(t_matrix *matrix);
 void			ft_print_var(t_var *v);
 void			ft_stack_print(t_list *v);
 
-int				ft_parse_num_str(char **inp, double num, t_list **stack_vars);
+int				ft_parse_num_str(char **inp, double num, t_list **stack_vars, t_var_type *vt);
 
 int				ft_process_stack_op(t_poly_op *poly_op);
 int				ft_empty_op_stack(t_poly_op *poly_op, uint8_t cbrac);

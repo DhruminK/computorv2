@@ -30,13 +30,14 @@ void	ft_print_complex(t_cd *c, uint8_t in_poly)
 		printf("(");
 	printf("%0.3f", mult * c->real);
 	if (c->imag * mult < 0.0)
-		printf("- %0.3fi", c->imag);
+		printf(" - %0.3fi", c->imag);
 	else if (c->imag * mult > 0.0)
-		printf("+ %0.3fi", c->imag * mult);
+		printf(" + %0.3fi", c->imag * mult);
 	if (in_poly && c->imag != 0.0)
 		printf(")");
 }
 
+/**
 void	ft_print_poly(t_poly *poly)
 {
 	int	i;
@@ -49,6 +50,28 @@ void	ft_print_poly(t_poly *poly)
 	{
 		ft_print_complex(poly->coff + i, 1);
 		printf("x ^ %d", i);
+	}
+}
+*/
+
+void	ft_print_poly(t_poly *poly)
+{
+	t_list		*ele;
+	t_poly_var	*pvar;
+
+	if (!poly || !(poly->coff))
+	{
+		printf("0");
+		return ;
+	}
+	ele = poly->coff;
+	while (ele)
+	{
+		pvar = (t_poly_var *)(ele->content);
+		ft_print_complex(&(pvar->coff), 1);
+		if (pvar->degree != 0.0)
+			printf("x ^ %0.3f", pvar->degree);
+		ele = ele->next;
 	}
 }
 
@@ -82,7 +105,10 @@ void	ft_print_var(t_var *v)
 		return (ft_print_matrix(&(v->choice.matrix)));
 	else if (v->type == CV2_RATIONAL || v->type == CV2_COMPLEX)
 	{
-		ft_print_complex(v->choice.poly.coff, 0);
+		if (v->choice.poly.coff)
+			ft_print_complex(&((t_poly_var *)(v->choice.poly.coff->content))->coff, 0);
+		else
+			printf("0");
 		printf("\n");
 		return ;
 	}

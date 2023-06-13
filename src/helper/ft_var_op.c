@@ -27,12 +27,14 @@ static int	ft_var_matrix_op(t_var *out, t_var *v1, t_var *v2, char op)
 	if (op == 'M' || op == 'm')
 		return (ft_matrix_mult(&(out->choice.matrix),
 				&(v1->choice.matrix), &(v2->choice.matrix)));
+	/**
 	if (op == '*' && (v1->type == CV2_MATRIX && v2->type != CV2_MATRIX))
 		return (ft_matrix_scalar_mult(&(out->choice.matrix),
 				&(v1->choice.matrix), v2->choice.poly.coff[0].real));
 	if (op == '*' && (v1->type != CV2_MATRIX && v2->type == CV2_MATRIX))
 		return (ft_matrix_scalar_mult(&(out->choice.matrix),
 				&(v2->choice.matrix), v1->choice.poly.coff[0].real));
+				*/
 	return (-1);
 }
 

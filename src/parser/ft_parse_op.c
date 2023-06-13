@@ -90,6 +90,7 @@ int	ft_add_op_stack(t_poly_op *poly_op, char op)
 		else
 			break ;
 	}
+	poly_op->prev_type = CV2_OP;
 	if (ret == 0 && ft_stack_push(&(poly_op->stack_op), &new_v) == -1)
 		return (-1);
 	return (ret);
