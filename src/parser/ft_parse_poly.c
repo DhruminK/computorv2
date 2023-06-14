@@ -16,7 +16,8 @@ static int	ft_clean_poly(t_poly_op *poly_op, t_var *out, int ret)
 	return (ret);
 }
 
-static int	ft_parse_poly_line(char **inp, char *var_name, t_poly_op *poly_op)
+static int	ft_parse_poly_line(char **inp, char *var_name,
+				t_list *var_avail, t_poly_op *poly_op)
 {
 	int	ret;
 
@@ -24,12 +25,14 @@ static int	ft_parse_poly_line(char **inp, char *var_name, t_poly_op *poly_op)
 		return (-1);
 	ret = ft_valid(*(*inp));
 	if (ret == 2)
-		return (ft_parse_num_str(inp, 0, &(poly_op->stack_vars), &(poly_op->prev_type)));
+		return (ft_parse_num_str(inp, 0, poly_op));
 	if (ret == 3 || ret == 4 || ret == 5 || ret == 6
 		|| ret == 8 || ret == 9 || ret == 10)
 		return (ft_parse_op(inp, poly_op));
 	if (var_name && strncmp(var_name, (*inp), strlen(var_name)))
 		return (-1);
+	if (ret == 1)
+		return (ft_parse_var_name(inp, var_avail, poly_op));
 	return (-1);
 }
 
@@ -46,12 +49,12 @@ int	ft_parse_poly(t_poly_inp *poly_inp)
 			&& *(poly_inp->inp) != poly_inp->end_char)
 	{
 		ft_skipspaces(&(poly_inp->inp));
-		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name, &poly_op);
+		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name, poly_inp->vars_avail, &poly_op);
 		if (ret == -1)
 			break ;
 	}
 	if (!ret && *(poly_inp->inp) && (poly_inp->end_char))
-		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name, &poly_op);
+		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name, poly_inp->vars_avail, &poly_op);
 	return (ft_clean_poly(&poly_op, &(poly_inp->out), ret));
 
 }

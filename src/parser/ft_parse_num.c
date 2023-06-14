@@ -65,16 +65,16 @@ void	ft_parse_num(char **inp, double *coff, int8_t is_minus)
 	*coff *= is_minus;
 }
 
-int	ft_parse_num_str(char **inp, double num, t_list **stack_vars, t_var_type *vt)
+static int	ft_parse_into_var(char **inp, double num, t_var *v)
 {
-	int		is_minus;
 	t_cd	coff;
-	t_var	var;
+	uint8_t	is_minus;
 
-	if (!stack_vars || !vt)
+	if (!v)
 		return (-1);
-	var.type = CV2_RATIONAL;
-	ft_poly_init(&(var.choice.poly), 0, 0);
+	v->var_name = 0;
+	v->type = CV2_RATIONAL;
+	ft_poly_init(&(v->choice.poly), 0, 0);
 	coff.imag = 0;
 	coff.real = num;
 	is_minus = 0;
@@ -85,11 +85,23 @@ int	ft_parse_num_str(char **inp, double num, t_list **stack_vars, t_var_type *vt
 		(*inp) += is_minus;
 		ft_parse_num(inp, &(coff.real), is_minus);
 	}
-	if (ft_poly_var_init(&(var.choice.poly), 0, coff) == -1
-		|| ft_stack_push(stack_vars, &var) == -1)
-		is_minus = -1;
-	*vt = var.type;
-	if (is_minus == -1)
-		ft_poly_free(&(var.choice.poly));
-	return (is_minus);
+	if (ft_poly_var_init(&(v->choice.poly), 0, coff) == -1)
+		return (-1);
+	return (0);
+}
+
+int	ft_parse_num_str(char **inp, double num, t_poly_op *poly_op)
+{
+	t_var	v;
+
+	if (!poly_op)
+		return (-1);
+	if (ft_parse_into_var(inp, num, &v) == -1
+		|| ft_stack_push(&(poly_op->stack_vars), &v) == -1)
+	{
+		ft_poly_free(&(v.choice.poly));
+		return (-1);
+	}
+	poly_op->prev_type = CV2_RATIONAL;
+	return (0);
 }

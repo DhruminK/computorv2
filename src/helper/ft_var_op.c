@@ -83,6 +83,7 @@ int	ft_var_op(t_var *out, t_var *v1, t_var *v2, char op)
 
 	if (!out || !v1 || !v2)
 		return (-1);
+	out->var_name = 0;
 	ret = 1;
 	if (v1->type == CV2_MATRIX || v2->type == CV2_MATRIX)
 		ret = ft_var_matrix_op(out, v2, v1, op);

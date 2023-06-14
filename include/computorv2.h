@@ -153,7 +153,7 @@ void			ft_print_matrix(t_matrix *matrix);
 void			ft_print_var(t_var *v);
 void			ft_stack_print(t_list *v);
 
-int				ft_parse_num_str(char **inp, double num, t_list **stack_vars, t_var_type *vt);
+int				ft_parse_num_str(char **inp, double num, t_poly_op *poly_op);
 
 int				ft_process_stack_op(t_poly_op *poly_op);
 int				ft_empty_op_stack(t_poly_op *poly_op, uint8_t cbrac);
@@ -161,6 +161,10 @@ int				ft_add_op_stack(t_poly_op *poly_op, char op);
 int				ft_parse_op_validate(char op, t_poly_op *poly_op);
 int				ft_parse_op(char **inp, t_poly_op *poly_op);
 int				ft_parse_poly(t_poly_inp *poly_inp);
+int				ft_parse_var_name(char **inp, t_list *var_avail, t_poly_op *poly_op);
+void			ft_parse_name(char **inp, char **var_name);
+int				ft_process_line(char *buf, t_list **vars);
+int				ft_parse_assign(char *buf, t_list **var);
 
 int				ft_op_precedence(char op);
 

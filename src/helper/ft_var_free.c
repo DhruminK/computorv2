@@ -16,6 +16,8 @@ void	ft_var_free(t_var *v)
 {
 	if (!v)
 		return ;
+	if (v->var_name)
+		free(v->var_name);
 	if (v->type == CV2_MATRIX)
 		ft_matrix_free(&(v->choice.matrix));
 	else if (v->type != CV2_NONE && v->type != CV2_OP)

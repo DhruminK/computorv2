@@ -64,6 +64,7 @@ int	ft_parse_inp_move(char **inp)
 void	ft_parse_name(char **inp, char **var_name)
 {
 	char	*s;
+	char	ch;
 	int		val;
 
 	if (!inp || !var_name)
@@ -74,8 +75,12 @@ void	ft_parse_name(char **inp, char **var_name)
 		return ;
 	s = *inp;
 	while (s && *s && (val == 1 || val == 2))
-		val = ft_valid(*(s++));
-	*var_name = strndup(*inp, s - (*inp) + 1);
+	{
+		s += 1;
+		ch = *s;
+		val = ft_valid(ch);
+	}
+	*var_name = strndup(*inp, s - (*inp));
 	if (!(*var_name))
 		return ;
 	*inp = s;
@@ -90,8 +95,7 @@ int	ft_parse_op_validate(char op, t_poly_op *poly_op)
 	if (op == '-' && (poly_op->prev_type == CV2_OP
 		|| poly_op->prev_type == CV2_NONE))
 	{
-		ret = ft_parse_num_str(0, -1,
-				&(poly_op->stack_vars), &(poly_op->prev_type));
+		ret = ft_parse_num_str(0, -1, poly_op);
 		if (ret == 0)
 			ret = ft_add_op_stack(poly_op, '*');
 		if (ret == -1)

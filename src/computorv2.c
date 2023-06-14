@@ -1,5 +1,6 @@
 #include "computorv2.h"
 
+/**
 static int	ft_process_line(char *buf, t_list *vars)
 {
 	t_poly_inp	inp;
@@ -16,6 +17,7 @@ static int	ft_process_line(char *buf, t_list *vars)
 	ft_var_free(&(inp.out));
 	return (0);
 }
+*/
 
 static int	ft_get_line(t_list **vars)
 {
@@ -28,7 +30,7 @@ static int	ft_get_line(t_list **vars)
 	ret = get_next_line(0, &buf);
 	if (ret == 1 && strcasecmp("quit", buf) == 0)
 		ret = 0;
-	if (ret == 1 && ft_process_line(buf, *vars) == -1)
+	if (ret == 1 && ft_process_line(buf, vars) == -1)
 		ret = -1;
 	if (buf)
 		free(buf);
@@ -52,5 +54,6 @@ int	main(void)
 	if (ret < 0)
 		return (1);
 	printf("'quit' keyword or EOF detected, exiting the program\n");
+	ft_stack_free(&vars);
 	return (0);
 }

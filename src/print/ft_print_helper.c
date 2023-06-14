@@ -58,19 +58,23 @@ void	ft_print_poly(t_poly *poly)
 {
 	t_list		*ele;
 	t_poly_var	*pvar;
+	char		*v;
 
 	if (!poly || !(poly->coff))
 	{
 		printf("0");
 		return ;
 	}
+	v = "x";
+	if (poly->var_name)
+		v = poly->var_name;
 	ele = poly->coff;
 	while (ele)
 	{
 		pvar = (t_poly_var *)(ele->content);
 		ft_print_complex(&(pvar->coff), 1);
 		if (pvar->degree != 0.0)
-			printf("x ^ %0.3f", pvar->degree);
+			printf("%s ^ %0.3f", v, pvar->degree);
 		ele = ele->next;
 	}
 }
