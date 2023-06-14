@@ -67,12 +67,10 @@ int	ft_poly_pow(t_poly *out, t_poly *base, t_poly *pow)
 	t_cd		c2;
 	t_cd		coff;
 
-	printf("HERE %d %d\n", base->num_vars, pow->num_vars);
 	if (!out || !base || !pow || base->num_vars > 1 || pow->num_vars > 1
 		|| base->max_degree != pow->min_degree || base->max_degree != 0
 		|| pow->max_degree != pow->min_degree || pow->max_degree != 0)
 		return (-1);
-	printf("HERE\n");
 	ft_poly_init(out, 0, 0);
 	coff.imag = 0.0;
 	memset(&c1, 0, sizeof(t_cd));
@@ -81,7 +79,6 @@ int	ft_poly_pow(t_poly *out, t_poly *base, t_poly *pow)
 		memcpy(&c1, &(((t_poly_var *)(base->coff->content))->coff), sizeof(t_cd));
 	if (pow->coff)
 		memcpy(&c2, &(((t_poly_var *)(pow->coff->content))->coff), sizeof(t_cd));
-	ft_print_complex(&c2, 0);
 	if (c2.imag != 0 || c1.real - (long)c1.real != 0)
 		return (-1);
 	if (c1.imag != 0 && ft_cd_pow(&coff, c1, (int)(c2.real)) == -1)

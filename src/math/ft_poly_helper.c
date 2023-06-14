@@ -38,7 +38,7 @@ static int	ft_poly_var_find_coff(t_list **head, t_poly_var *p)
 	}
 	if (b == 1)
 		return (ft_cd_add(&(pvar->coff), pvar->coff, p->coff, 0));
-	ele = ft_lstnew(p, sizeof(t_cd));
+	ele = ft_lstnew(p, sizeof(t_poly_var));
 	if (!ele)
 		return (-1);
 	ft_lstadd_front(head, ele);

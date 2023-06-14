@@ -75,7 +75,7 @@ int	ft_parse_num_str(char **inp, double num, t_list **stack_vars, t_var_type *vt
 		return (-1);
 	var.type = CV2_RATIONAL;
 	ft_poly_init(&(var.choice.poly), 0, 0);
-	memset(&coff, 0, sizeof(t_cd));
+	coff.imag = 0;
 	coff.real = num;
 	is_minus = 0;
 	if (inp)
