@@ -147,7 +147,7 @@ int				ft_matrix_scalar_mult(t_matrix *out,
 					t_matrix *m1, double num);
 int				ft_matrix_mult(t_matrix *out, t_matrix *m1, t_matrix *m2);
 
-void			ft_print_complex(t_cd *c, uint8_t in_poly);
+void			ft_print_complex(t_cd *c, uint8_t in_poly, uint8_t is_first);
 void			ft_print_poly(t_poly *poly);
 void			ft_print_matrix(t_matrix *matrix);
 void			ft_print_var(t_var *v);
@@ -165,6 +165,7 @@ int				ft_parse_var_name(char **inp, t_list *var_avail, t_poly_op *poly_op);
 void			ft_parse_name(char **inp, char **var_name);
 int				ft_process_line(char *buf, t_list **vars);
 int				ft_parse_assign(char *buf, t_list **var);
+int				ft_parse_poly_var(char **inp, t_poly_op *poly_op, char *var_name);
 
 int				ft_op_precedence(char op);
 

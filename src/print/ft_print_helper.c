@@ -12,7 +12,7 @@
 
 #include "computorv2.h"
 
-void	ft_print_complex(t_cd *c, uint8_t in_poly)
+void	ft_print_complex(t_cd *c, uint8_t in_poly, uint8_t is_first)
 {
 	int		mult;
 
@@ -24,7 +24,7 @@ void	ft_print_complex(t_cd *c, uint8_t in_poly)
 		printf(" - ");
 		mult = -1;
 	}
-	else if (in_poly)
+	else if (in_poly && !is_first)
 		printf(" + ");
 	if (in_poly && c->imag != 0.0)
 		printf("(");
@@ -59,6 +59,7 @@ void	ft_print_poly(t_poly *poly)
 	t_list		*ele;
 	t_poly_var	*pvar;
 	char		*v;
+	uint8_t		b;
 
 	if (!poly || !(poly->coff))
 	{
@@ -66,17 +67,20 @@ void	ft_print_poly(t_poly *poly)
 		return ;
 	}
 	v = "x";
+	b = 1;
 	if (poly->var_name)
 		v = poly->var_name;
 	ele = poly->coff;
 	while (ele)
 	{
 		pvar = (t_poly_var *)(ele->content);
-		ft_print_complex(&(pvar->coff), 1);
+		ft_print_complex(&(pvar->coff), 1, b);
 		if (pvar->degree != 0.0)
-			printf("%s ^ %0.3f", v, pvar->degree);
+			printf(" * %s ^ %0.3f", v, pvar->degree);
+		b = 0;
 		ele = ele->next;
 	}
+	printf("\n");
 }
 
 void	ft_print_matrix(t_matrix *matrix)
@@ -93,7 +97,7 @@ void	ft_print_matrix(t_matrix *matrix)
 		printf("[");
 		while (j < matrix->n)
 		{
-			ft_print_complex(matrix->matrix[i] + j++, 0);
+			ft_print_complex(matrix->matrix[i] + j++, 0, 0);
 			printf(" , ");
 		}
 		printf("]\n");
@@ -110,7 +114,7 @@ void	ft_print_var(t_var *v)
 	else if (v->type == CV2_RATIONAL || v->type == CV2_COMPLEX)
 	{
 		if (v->choice.poly.coff)
-			ft_print_complex(&((t_poly_var *)(v->choice.poly.coff->content))->coff, 0);
+			ft_print_complex(&((t_poly_var *)(v->choice.poly.coff->content))->coff, 0, 0);
 		else
 			printf("0");
 		printf("\n");

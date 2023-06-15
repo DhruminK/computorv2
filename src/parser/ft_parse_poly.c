@@ -20,19 +20,23 @@ static int	ft_parse_poly_line(char **inp, char *var_name,
 				t_list *var_avail, t_poly_op *poly_op)
 {
 	int	ret;
+	int	val;
 
 	if (!inp || !poly_op)
 		return (-1);
-	ret = ft_valid(*(*inp));
-	if (ret == 2)
+	ret = 0;
+	val = ft_valid(*(*inp));
+	if (val == 2)
 		return (ft_parse_num_str(inp, 0, poly_op));
-	if (ret == 3 || ret == 4 || ret == 5 || ret == 6
-		|| ret == 8 || ret == 9 || ret == 10)
+	if (val == 3 || val == 4 || val == 5 || val == 6
+		|| val == 8 || val == 9 || val == 10)
 		return (ft_parse_op(inp, poly_op));
-	if (var_name && strncmp(var_name, (*inp), strlen(var_name)))
-		return (-1);
-	if (ret == 1)
+	if (var_name && !strncasecmp(var_name, (*inp), strlen(var_name)))
+		ret = ft_parse_poly_var(inp, poly_op, var_name);
+	if (ret == 0 && val == 1)
 		return (ft_parse_var_name(inp, var_avail, poly_op));
+	if (ret == 1)
+		return (0);
 	return (-1);
 }
 
