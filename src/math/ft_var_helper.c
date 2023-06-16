@@ -48,3 +48,22 @@ int	ft_var_cpy_no_name(t_var *dst, t_var *src)
 		memcpy(&(dst->choice), &(src->choice), sizeof(t_vars));
 	return (ret);
 }
+
+int	ft_var_num_init(t_var *v, double real, t_cd *coff)
+{
+	t_cd	c;
+	if (!v)
+		return (-1);
+	v->type = CV2_RATIONAL;
+	if (coff && coff->imag != 0.0)
+		v->type = CV2_COMPLEX;
+	memset(&c, 0, sizeof(t_cd));
+	if (!coff)
+		c.real = real;
+	else
+		memcpy(&c, coff, sizeof(t_cd));
+	ft_poly_init(&(v->choice.poly), 0, 0);
+	if (ft_poly_var_init(&(v->choice.poly), 0, c) == -1)
+		return (-1);
+	return (0);
+}

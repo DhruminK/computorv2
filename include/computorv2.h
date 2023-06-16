@@ -109,7 +109,9 @@ int				ft_parse_var(char **inp, t_list *vars, t_list **stack_vars);
 
 void			ft_var_free(t_var *var);
 int				ft_var_op(t_var *out, t_var *v1, t_var *v2, char op);
+int				ft_var_op_wo_free(t_var *out, t_var *v1, t_var *v2, char op);
 int				ft_var_cpy_no_name(t_var *dst, t_var *src);
+int				ft_var_num_init(t_var *v, double real, t_cd *coff);
 
 double			ft_pow(double val, int n);
 long			ft_gcd(long a, long b);
@@ -168,6 +170,10 @@ int				ft_parse_assign(char *buf, t_list **var);
 int				ft_parse_poly_var(char **inp, t_poly_op *poly_op, char *var_name);
 
 int				ft_op_precedence(char op);
+
+int				ft_process_func_op(t_var *out, t_var *func, t_var *arg);
+int				ft_func_num_process(t_var *out, t_var *func, t_var *arg);
+int				ft_func_poly_process(t_var *out, t_var *func, t_var *arg);
 
 void			ft_sigint_recv(int signo);
 #endif
