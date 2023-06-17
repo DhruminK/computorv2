@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_op.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 12:38:56 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/17 12:44:19 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
-static int	ft_process_stack_free(t_var *v1, t_var *v2, t_var *op, t_poly_op *poly_op)
+static int	ft_process_stack_free(t_var *v1, t_var *v2, t_var *op,
+				t_poly_op *poly_op)
 {
 	t_var	new_v;
 	int		ret;
@@ -82,18 +95,17 @@ int	ft_add_op_stack(t_poly_op *poly_op, char op)
 		return (ft_empty_op_stack(poly_op, 1));
 	op_prece1 = ft_op_precedence(op);
 	ret = 0;
-	while (ret == -1 && op != '(' && poly_op->stack_op)
+	while (ret == 0 && op != '(' && poly_op->stack_op)
 	{
+		ret = 1;
 		ft_stack_top(poly_op->stack_op, &v);
-		if (ft_op_precedence(v.choice.ch) < op_prece1)
+		if (ft_op_precedence(v.choice.ch) > op_prece1)
 			ret = ft_process_stack_op(poly_op);
-		else
-			break ;
 	}
 	poly_op->prev_type = CV2_OP;
 	new_v.var_name = 0;
-	if (ret == 0 && ft_stack_push(&(poly_op->stack_op), &new_v) == -1)
-		return (-1);
+	if (ret >= 0)
+		ret = ft_stack_push(&(poly_op->stack_op), &new_v);
 	return (ret);
 }
 

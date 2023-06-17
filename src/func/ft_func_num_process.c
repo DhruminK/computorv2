@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_func_num_process.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 12:25:26 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/17 12:26:11 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
-static int	ft_func_process_single_pvar(t_var *out, t_var *arg, t_poly_var *pvar)
+static int	ft_func_process_single_pvar(t_var *out, t_var *arg,
+				t_poly_var *pvar)
 {
 	t_var	pow;
 	t_var	coff;
@@ -25,7 +38,8 @@ static int	ft_func_process_single_pvar(t_var *out, t_var *arg, t_poly_var *pvar)
 	return (ret);
 }
 
-static int	ft_func_num_process_loop_pvar(t_var *out, t_var *arg, t_list *func_list)
+static int	ft_func_num_process_loop_pvar(t_var *out, t_var *arg,
+				t_list *func_list)
 {
 	t_poly_var	*pvar;
 	t_var		tmp_out;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_poly_add.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 12:35:36 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/17 12:35:54 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 static int	ft_poly_add_sub_single_var(t_poly *out, t_poly_var *pvar1,
@@ -19,7 +31,8 @@ static int	ft_poly_add_sub_single_var(t_poly *out, t_poly_var *pvar1,
 	return (0);
 }
 
-static int	ft_poly_add_sub_loop(t_poly *out, t_list *ele1, t_list *ele2, uint8_t sub)
+static int	ft_poly_add_sub_loop(t_poly *out, t_list *ele1,
+				t_list *ele2, uint8_t sub)
 {
 	t_poly_var	*pvar1;
 	t_poly_var	*pvar2;

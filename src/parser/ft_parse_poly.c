@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_poly.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 12:33:13 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/17 12:34:06 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 static int	ft_clean_poly(t_poly_op *poly_op, t_var *out, int ret)
@@ -50,15 +62,16 @@ int	ft_parse_poly(t_poly_inp *poly_inp)
 	memset(&poly_op, 0, sizeof(t_poly_op));
 	ret = 0;
 	while (poly_inp->inp && *(poly_inp->inp)
-			&& *(poly_inp->inp) != poly_inp->end_char)
+		&& *(poly_inp->inp) != poly_inp->end_char)
 	{
 		ft_skipspaces(&(poly_inp->inp));
-		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name, poly_inp->vars_avail, &poly_op);
+		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name,
+				poly_inp->vars_avail, &poly_op);
 		if (ret == -1)
 			break ;
 	}
 	if (!ret && *(poly_inp->inp) && (poly_inp->end_char))
-		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name, poly_inp->vars_avail, &poly_op);
+		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name,
+				poly_inp->vars_avail, &poly_op);
 	return (ft_clean_poly(&poly_op, &(poly_inp->out), ret));
-
 }

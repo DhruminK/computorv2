@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_poly_mult.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 12:36:10 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/17 12:36:41 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 static int	ft_poly_op_mult_loop(t_poly *out, t_list *ele1, t_list *ele2)
@@ -76,9 +88,11 @@ int	ft_poly_pow(t_poly *out, t_poly *base, t_poly *pow)
 	memset(&c1, 0, sizeof(t_cd));
 	memset(&c2, 0, sizeof(t_cd));
 	if (base->coff)
-		memcpy(&c1, &(((t_poly_var *)(base->coff->content))->coff), sizeof(t_cd));
+		memcpy(&c1, &(((t_poly_var *)(base->coff->content))->coff),
+			sizeof(t_cd));
 	if (pow->coff)
-		memcpy(&c2, &(((t_poly_var *)(pow->coff->content))->coff), sizeof(t_cd));
+		memcpy(&c2, &(((t_poly_var *)(pow->coff->content))->coff),
+			sizeof(t_cd));
 	if (c2.imag != 0 || c1.real - (long)c1.real != 0)
 		return (-1);
 	if (c1.imag != 0 && ft_cd_pow(&coff, c1, (int)(c2.real)) == -1)

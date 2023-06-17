@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:04:53 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/01 16:05:06 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 12:36:55 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_var_cpy_no_name(t_var *dst, t_var *src)
 int	ft_var_num_init(t_var *v, double real, t_cd *coff)
 {
 	t_cd	c;
+
 	if (!v)
 		return (-1);
 	v->type = CV2_RATIONAL;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_func_assign.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 12:28:09 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/17 12:28:49 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 static int	ft_parse_assign_func_validate(char **buf, char **func_var_name)
@@ -22,7 +34,8 @@ static int	ft_parse_assign_func_validate(char **buf, char **func_var_name)
 	return (1);
 }
 
-static int	ft_parse_assign_validate(char **buf, char **var_name, char **func_var_name)
+static int	ft_parse_assign_validate(char **buf, char **var_name,
+				char **func_var_name)
 {
 	int	ret;
 
@@ -70,7 +83,8 @@ static void	ft_parse_assign_find_rm_old(t_list **vars, char *var_name)
 	free(ele);
 }
 
-static int	ft_parse_assign_add_var(t_list **vars, t_var *new_v, char *func_name)
+static int	ft_parse_assign_add_var(t_list **vars,
+				t_var *new_v, char *func_name)
 {
 	t_list	*ele;
 
@@ -106,7 +120,7 @@ int	ft_parse_assign(char *buf, t_list **var)
 	memset(&poly_inp, 0, sizeof(t_poly_inp));
 	poly_inp.vars_avail = *var;
 	poly_inp.inp = buf;
-	poly_inp.var_name= func_name;
+	poly_inp.var_name = func_name;
 	if (ft_parse_poly(&poly_inp) == -1)
 	{
 		free(var_name);

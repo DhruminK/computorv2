@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:32:51 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/05/29 16:33:05 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 12:29:07 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	ft_parse_op_validate(char op, t_poly_op *poly_op)
 	if (!poly_op)
 		return (-1);
 	if (op == '-' && (poly_op->prev_type == CV2_OP
-		|| poly_op->prev_type == CV2_NONE))
+			|| poly_op->prev_type == CV2_NONE))
 	{
 		ret = ft_parse_num_str(0, -1, poly_op);
 		if (ret == 0)

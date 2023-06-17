@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_poly_var.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 12:34:18 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/17 12:34:31 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 static int	ft_parse_poly_find_degree(char **inp, double *degree)
@@ -16,7 +28,8 @@ static int	ft_parse_poly_find_degree(char **inp, double *degree)
 	return (0);
 }
 
-static int	ft_parse_poly_var_name_validate(char **inp, double *deg, char *var_name)
+static int	ft_parse_poly_var_name_validate(char **inp, double *deg,
+				char *var_name)
 {
 	int		ret;
 	char	*s;

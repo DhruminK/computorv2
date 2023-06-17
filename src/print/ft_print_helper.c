@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:07:09 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/01 17:02:50 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 12:27:38 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ void	ft_print_var(t_var *v)
 	else if (v->type == CV2_RATIONAL || v->type == CV2_COMPLEX)
 	{
 		if (v->choice.poly.coff)
-			ft_print_complex(&((t_poly_var *)(v->choice.poly.coff->content))->coff, 0, 0);
+			ft_print_complex(&((t_poly_var *)
+					(v->choice.poly.coff->content))->coff, 0, 0);
 		else
 			printf("0");
 		printf("\n");
