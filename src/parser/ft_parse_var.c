@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:34:38 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:34:39 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 15:22:44 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	ft_parse_var_name(char **inp, t_list *var_avail, t_poly_op *poly_op)
 	if (!var_name)
 		return (-1);
 	ret = ft_var_name_process(&var_name, poly_op, var_avail, &v);
-	/// TODO : processing of functions in case ret = 1
+	if (ret == 1)
+		ret = ft_parse_func_var(v, inp, poly_op);
 	if (var_name)
 		free(var_name);
 	if (ret == 0)

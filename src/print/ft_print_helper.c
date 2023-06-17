@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:07:09 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:27:38 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 14:12:21 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	ft_print_complex(t_cd *c, uint8_t in_poly, uint8_t is_first)
 		printf(" + ");
 	if (in_poly && c->imag != 0.0)
 		printf("(");
-	printf("%0.3f", mult * c->real);
+	printf("%0.1f", mult * c->real);
 	if (c->imag * mult < 0.0)
-		printf(" - %0.3fi", c->imag);
+		printf(" - %0.1fi", c->imag);
 	else if (c->imag * mult > 0.0)
-		printf(" + %0.3fi", c->imag * mult);
+		printf(" + %0.1fi", c->imag * mult);
 	if (in_poly && c->imag != 0.0)
 		printf(")");
 }
@@ -76,7 +76,7 @@ void	ft_print_poly(t_poly *poly)
 		pvar = (t_poly_var *)(ele->content);
 		ft_print_complex(&(pvar->coff), 1, b);
 		if (pvar->degree != 0.0)
-			printf(" * %s ^ %0.3f", v, pvar->degree);
+			printf(" * %s^%0.0f", v, pvar->degree);
 		b = 0;
 		ele = ele->next;
 	}

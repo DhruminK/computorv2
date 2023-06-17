@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:36:03 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:36:04 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 16:10:21 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	ft_poly_free(t_poly *poly)
 	t_list	*ele;
 	t_list	*next;
 
+	if (!poly)
+		return ;
 	ele = poly->coff;
 	while (ele)
 	{

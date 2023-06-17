@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:25:26 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:26:11 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 16:11:20 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_func_process_single_pvar(t_var *out, t_var *arg,
 	if (ret != -1)
 		ret = ft_var_num_init(&coff, 0, &(pvar->coff));
 	if (ret != -1)
-		ret = ft_var_op_wo_free(&tmp_out, arg, &pow, '^');
+		ret = ft_var_op_wo_free(&tmp_out, &pow, arg, '^');
 	if (ret != -1)
 		ret = ft_var_op_wo_free(out, &coff, &tmp_out, '*');
 	ft_var_free(&pow);
@@ -38,6 +38,7 @@ static int	ft_func_process_single_pvar(t_var *out, t_var *arg,
 	return (ret);
 }
 
+/**
 static int	ft_func_num_process_loop_pvar(t_var *out, t_var *arg,
 				t_list *func_list)
 {
@@ -64,6 +65,32 @@ static int	ft_func_num_process_loop_pvar(t_var *out, t_var *arg,
 		ft_var_free(out);
 	ft_var_free(&tmp_out);
 	ft_var_free(&tmp_out1);
+	return (ret);
+}
+*/
+
+static int	ft_func_num_process_loop_pvar(t_var *out, t_var *arg,
+				t_list *func_list)
+{
+	t_poly_var	*pvar;
+	t_var		tmp_out;
+	t_var		tmp_out1;
+	int			ret;
+
+	if (!out || !arg || !func_list)
+		return (-1);
+	ret = ft_var_num_init(&tmp_out1, 0, 0);
+	while (func_list && ret != -1)
+	{
+		pvar = (t_poly_var *)(func_list->content);
+		ret = ft_func_process_single_pvar(&tmp_out, arg, pvar);
+		if (ret != -1)
+			ret = ft_var_op(out, &tmp_out1, &tmp_out, '+');
+		memcpy(&tmp_out1, out, sizeof(t_var));
+		func_list = func_list->next;
+	}
+	if (ret == -1)
+		ft_var_free(out);
 	return (ret);
 }
 

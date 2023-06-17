@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:04:53 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:36:55 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 16:10:45 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_var_num_init(t_var *v, double real, t_cd *coff)
 
 	if (!v)
 		return (-1);
+	memset(v, 0, sizeof(t_var));
 	v->type = CV2_RATIONAL;
 	if (coff && coff->imag != 0.0)
 		v->type = CV2_COMPLEX;

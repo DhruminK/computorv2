@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:33:13 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:34:06 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 16:13:52 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	ft_parse_poly(t_poly_inp *poly_inp)
 	if (!poly_inp || !(poly_inp->inp))
 		return (-1);
 	memset(&poly_op, 0, sizeof(t_poly_op));
+	poly_op.poly_inp = poly_inp;
 	ret = 0;
 	while (poly_inp->inp && *(poly_inp->inp)
 		&& *(poly_inp->inp) != poly_inp->end_char)
@@ -70,8 +71,5 @@ int	ft_parse_poly(t_poly_inp *poly_inp)
 		if (ret == -1)
 			break ;
 	}
-	if (!ret && *(poly_inp->inp) && (poly_inp->end_char))
-		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name,
-				poly_inp->vars_avail, &poly_op);
 	return (ft_clean_poly(&poly_op, &(poly_inp->out), ret));
 }

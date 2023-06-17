@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:28:09 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:28:49 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 15:23:22 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,12 @@ static int	ft_parse_assign_add_var(t_list **vars,
 	if (!vars || !new_v || !(new_v->var_name))
 		return (-1);
 	ft_parse_assign_find_rm_old(vars, new_v->var_name);
-	ele = ft_lstnew(new_v, sizeof(t_var));
 	if (new_v->choice.poly.var_name)
 		free(new_v->choice.poly.var_name);
 	new_v->choice.poly.var_name = func_name;
+	if (func_name)
+		new_v->type = CV2_FUNC;
+	ele = ft_lstnew(new_v, sizeof(t_var));
 	if (!ele)
 	{
 		ft_var_free(new_v);

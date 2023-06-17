@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:08:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:48:48 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 14:00:48 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,6 @@ typedef struct s_var
 	t_vars		choice;
 }				t_var;
 
-typedef struct s_poly_op
-{
-	t_list		*stack_vars;
-	t_list		*stack_op;
-	t_var_type	prev_type;
-}				t_poly_op;
-
 typedef struct s_poly_inp
 {
 	t_list		*vars_avail;
@@ -100,6 +93,14 @@ typedef struct s_poly_inp
 	char		*var_name;
 	char		end_char;
 }				t_poly_inp;
+
+typedef struct s_poly_op
+{
+	t_list		*stack_vars;
+	t_list		*stack_op;
+	t_var_type	prev_type;
+	t_poly_inp	*poly_inp;
+}				t_poly_op;
 
 void			ft_skipspaces(char **inp);
 int				ft_valid(char ch);
@@ -170,6 +171,7 @@ int				ft_process_line(char *buf, t_list **vars);
 int				ft_parse_assign(char *buf, t_list **var);
 int				ft_parse_poly_var(char **inp, t_poly_op *poly_op,
 					char *var_name);
+int				ft_parse_func_var(t_var *func, char **inp, t_poly_op *poly_op);
 
 int				ft_op_precedence(char op);
 

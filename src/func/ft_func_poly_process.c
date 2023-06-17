@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:26:21 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:26:22 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/17 13:57:16 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ int	ft_func_poly_process(t_var *out, t_var *func, t_var *arg)
 {
 	t_poly	*p;
 
-	if (!out || !func || !arg
-		|| (arg->type != CV2_POLY && arg->type != CV2_FUNC))
+	if (!out || !func || !arg || (arg->type != CV2_POLY
+			&& arg->type != CV2_COMPLEX && arg->type != CV2_FUNC))
 		return (-1);
 	p = &(func->choice.poly);
 	if (!(p->coff))
