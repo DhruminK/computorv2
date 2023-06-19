@@ -54,6 +54,8 @@ static int	ft_read_line(t_fd_info *fd_info, char **buf)
 		if (ret == -1)
 			return (-1);
 		index = ft_merge_two_buff(buf, buf2, ret);
+		if (index == 0 && index == ret - 1)
+			return (1);
 		if (index == -1 || index == ret - 1)
 			return (index);
 		if (index == ret && ret != BUFF_SIZE)

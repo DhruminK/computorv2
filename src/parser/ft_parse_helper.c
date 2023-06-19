@@ -47,6 +47,12 @@ int	ft_valid(char ch)
 		return (9);
 	else if (ch == ')')
 		return (10);
+	else if (ch == '[')
+		return (11);
+	else if (ch == ']')
+		return (12);
+	else if (ch == ';')
+		return (13);
 	return (0);
 }
 

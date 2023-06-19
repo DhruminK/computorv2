@@ -88,7 +88,8 @@ void	ft_print_matrix(t_matrix *matrix)
 	uint32_t	i;
 	uint32_t	j;
 
-	if (!matrix || !(matrix->matrix))
+	if (!matrix || !(matrix->matrix)
+		|| !(matrix->m) || !(matrix->n))
 		return ;
 	i = 0;
 	while (i < matrix->m)
@@ -97,8 +98,9 @@ void	ft_print_matrix(t_matrix *matrix)
 		printf("[");
 		while (j < matrix->n)
 		{
-			ft_print_complex(matrix->matrix[i] + j++, 0, 0);
+			ft_print_var(&(matrix->matrix[i][j]));
 			printf(" , ");
+			j += 1;
 		}
 		printf("]\n");
 		i += 1;

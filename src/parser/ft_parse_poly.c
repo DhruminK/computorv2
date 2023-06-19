@@ -14,7 +14,7 @@
 
 static int	ft_clean_poly(t_poly_op *poly_op, t_var *out, int ret)
 {
-	if (!poly_op)
+	if (!poly_op || !(poly_op->stack_vars))
 		return (-1);
 	if (!ret)
 		ret = ft_empty_op_stack(poly_op, 0);

@@ -53,11 +53,14 @@ typedef struct s_poly
 	t_list		*coff;
 }				t_poly;
 
+typedef struct s_var
+				t_var;
+
 typedef struct s_matrix
 {
 	uint32_t	m;
 	uint32_t	n;
-	t_cd		**matrix;
+	t_var		**matrix;
 }				t_matrix;
 
 typedef enum e_var_type
@@ -147,8 +150,9 @@ int				ft_matrix_init(t_matrix *matrix, uint32_t m, uint32_t n);
 int				ft_matrix_add(t_matrix *out, t_matrix *m1,
 					t_matrix *m2, uint8_t sub);
 int				ft_matrix_scalar_mult(t_matrix *out,
-					t_matrix *m1, double num);
+					t_matrix *m1, t_var *v);
 int				ft_matrix_mult(t_matrix *out, t_matrix *m1, t_matrix *m2);
+int				ft_matrix_add_row(t_matrix *matrix);
 
 void			ft_print_complex(t_cd *c, uint8_t in_poly, uint8_t is_first);
 void			ft_print_poly(t_poly *poly);
