@@ -41,7 +41,7 @@ static int	ft_parse_line_poly(char *buf, t_list *vars)
 	inp.inp = buf;
 	if (ft_parse_poly(&inp) == -1)
 		return (-1);
-	ft_print_var(&(inp.out));
+	ft_print_var(&(inp.out), 1);
 	ft_var_free(&(inp.out));
 	return (0);
 }

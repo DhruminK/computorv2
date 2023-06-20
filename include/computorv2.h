@@ -157,7 +157,7 @@ int				ft_matrix_add_row(t_matrix *matrix);
 void			ft_print_complex(t_cd *c, uint8_t in_poly, uint8_t is_first);
 void			ft_print_poly(t_poly *poly);
 void			ft_print_matrix(t_matrix *matrix);
-void			ft_print_var(t_var *v);
+void			ft_print_var(t_var *v, uint8_t nl);
 void			ft_stack_print(t_list *v);
 
 int				ft_parse_num_str(char **inp, double num, t_poly_op *poly_op);
@@ -176,6 +176,7 @@ int				ft_parse_assign(char *buf, t_list **var);
 int				ft_parse_poly_var(char **inp, t_poly_op *poly_op,
 					char *var_name);
 int				ft_parse_func_var(t_var *func, char **inp, t_poly_op *poly_op);
+int				ft_parse_matrix(char **inp, t_poly_op *poly_op);
 
 int				ft_op_precedence(char op);
 

@@ -14,18 +14,25 @@
 
 int	ft_matrix_cpy(t_matrix *dst, t_matrix *src)
 {
-	uint32_t	m;
+	uint32_t	i;
+	uint32_t	j;
 
 	if (!dst || !src)
 		return (-1);
 	if (ft_matrix_init(dst, src->m, src->n) == -1)
 		return (-1);
-	m = 0;
-	while (m < dst->m)
+	i = 0;
+	while (i < src->m)
 	{
-		memcpy(dst->matrix[m],
-			src->matrix[m], sizeof(t_cd) * dst->n);
-		m += 1;
+		j = 0;
+		while (j < src->n)
+		{
+			if (ft_var_cpy_no_name(&(dst->matrix[i][j]),
+					&(src->matrix[i][j])) == -1)
+				return (-1);
+			j += 1;
+		}
+		i += 1;
 	}
 	return (0);
 }

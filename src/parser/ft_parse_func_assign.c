@@ -91,9 +91,10 @@ static int	ft_parse_assign_add_var(t_list **vars,
 	if (!vars || !new_v || !(new_v->var_name))
 		return (-1);
 	ft_parse_assign_find_rm_old(vars, new_v->var_name);
-	if (new_v->choice.poly.var_name)
+	if (new_v->type != CV2_MATRIX && new_v->choice.poly.var_name)
 		free(new_v->choice.poly.var_name);
-	new_v->choice.poly.var_name = func_name;
+	if (new_v->type != CV2_MATRIX)
+		new_v->choice.poly.var_name = func_name;
 	if (func_name)
 		new_v->type = CV2_FUNC;
 	ele = ft_lstnew(new_v, sizeof(t_var));
@@ -103,7 +104,7 @@ static int	ft_parse_assign_add_var(t_list **vars,
 		return (-1);
 	}
 	ft_lstadd_back(vars, ele);
-	ft_print_var(new_v);
+	ft_print_var(new_v, 1);
 	return (0);
 }
 

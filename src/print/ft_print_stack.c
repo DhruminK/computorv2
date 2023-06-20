@@ -19,7 +19,7 @@ void	ft_stack_print(t_list *stack)
 	while (stack)
 	{
 		v = (t_var *)(stack->content);
-		ft_print_var(v);
+		ft_print_var(v, 1);
 		stack = stack->next;
 	}
 }

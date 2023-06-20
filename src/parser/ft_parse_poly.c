@@ -40,6 +40,8 @@ static int	ft_parse_poly_line(char **inp, char *var_name,
 	val = ft_valid(*(*inp));
 	if (val == 2)
 		return (ft_parse_num_str(inp, 0, poly_op));
+	if (val == 11)
+		return (ft_parse_matrix(inp, poly_op));
 	if (val == 3 || val == 4 || val == 5 || val == 6
 		|| val == 8 || val == 9 || val == 10)
 		return (ft_parse_op(inp, poly_op));

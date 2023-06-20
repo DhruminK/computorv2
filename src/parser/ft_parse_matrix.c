@@ -2,26 +2,26 @@
 
 static uint32_t	ft_parse_matrix_get_col_num(char *buf)
 {
-	uint32_t	num_rows;
+	uint32_t	num_cols;
 	uint8_t		b;
 	int			ret;
 
 	if (!buf)
 		return (0);
-	num_rows = 0;
+	num_cols = 0;
 	b = 0;
 	while (*buf && *buf != ']')
 	{
 		ret = ft_valid(*buf);
 		if (!b && (ret == 1 || ret == 2))
 			b = 1;
-		if (*buf == ';')
-			num_rows += 1;
+		if (*buf == ',')
+			num_cols += 1;
 		buf += 1;
 	}
-	if (b)
-		num_rows += 1;
-	return (num_rows);
+	if (b && num_cols != 0)
+		num_cols += 1;
+	return (num_cols);
 }
 
 static int	ft_parse_matrix_ele(char **inp, t_matrix *m,
@@ -114,15 +114,15 @@ int	ft_parse_matrix(char **inp, t_poly_op *poly_op)
 	(*inp) += 1;
 	if (ft_parse_inp_move(inp) != 11)
 		return (-1);
-	if (ft_matrix_init(&(v.choice.matrix), 0,
-		ft_parse_matrix_get_col_num(*inp)) == -1)
+	if (ft_matrix_init(&(v.choice.matrix), 1,
+		ft_parse_matrix_get_col_num(*inp + 1)) == -1)
 		return (-1);
-	(*inp) += 1;
 	pi.vars_avail = poly_op->poly_inp->vars_avail;
 	pi.var_name = poly_op->poly_inp->var_name;
 	if (ft_parse_matrix_rows(inp, &(v.choice.matrix), &pi) == -1)
 		return (-1);
 	v.type = CV2_MATRIX;
+	v.var_name = 0;
 	if (ft_stack_push(&(poly_op->stack_vars), &v) == -1)
 		return (-1);
 	return (0);

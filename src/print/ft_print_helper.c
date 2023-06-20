@@ -80,7 +80,6 @@ void	ft_print_poly(t_poly *poly)
 		b = 0;
 		ele = ele->next;
 	}
-	printf("\n");
 }
 
 void	ft_print_matrix(t_matrix *matrix)
@@ -98,8 +97,9 @@ void	ft_print_matrix(t_matrix *matrix)
 		printf("[");
 		while (j < matrix->n)
 		{
-			ft_print_var(&(matrix->matrix[i][j]));
-			printf(" , ");
+			ft_print_var(&(matrix->matrix[i][j]), 0);
+			if (j != matrix->n - 1)
+				printf(" , ");
 			j += 1;
 		}
 		printf("]\n");
@@ -107,7 +107,7 @@ void	ft_print_matrix(t_matrix *matrix)
 	}
 }
 
-void	ft_print_var(t_var *v)
+void	ft_print_var(t_var *v, uint8_t nl)
 {
 	if (!v)
 		return ;
@@ -120,11 +120,11 @@ void	ft_print_var(t_var *v)
 					(v->choice.poly.coff->content))->coff, 0, 0);
 		else
 			printf("0");
-		printf("\n");
-		return ;
 	}
 	else if (v->type == CV2_OP || v->type == CV2_NONE)
 		printf("This should not be printed: %c\n", v->choice.ch);
 	else
-		return (ft_print_poly(&(v->choice.poly)));
+		(ft_print_poly(&(v->choice.poly)));
+	if (nl)
+		printf("\n");
 }
