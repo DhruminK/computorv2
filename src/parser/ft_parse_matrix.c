@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_matrix.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/21 14:44:23 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/21 14:44:36 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 static uint32_t	ft_parse_matrix_get_col_num(char *buf)
@@ -115,7 +127,7 @@ int	ft_parse_matrix(char **inp, t_poly_op *poly_op)
 	if (ft_parse_inp_move(inp) != 11)
 		return (-1);
 	if (ft_matrix_init(&(v.choice.matrix), 1,
-		ft_parse_matrix_get_col_num(*inp + 1)) == -1)
+			ft_parse_matrix_get_col_num(*inp + 1)) == -1)
 		return (-1);
 	pi.vars_avail = poly_op->poly_inp->vars_avail;
 	pi.var_name = poly_op->poly_inp->var_name;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_matrix_helper.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/21 14:41:30 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/21 14:41:52 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
 void	ft_matrix_free(t_matrix *matrix)
@@ -22,7 +34,6 @@ void	ft_matrix_free(t_matrix *matrix)
 		free((matrix->matrix)[i]);
 		(matrix->matrix)[i] = 0;
 		i += 1;
-
 	}
 	free(matrix->matrix);
 	memset(matrix, 0, sizeof(t_matrix));

@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_matrix_op.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/21 14:42:00 by dkhatri           #+#    #+#             */
+/*   Updated: 2023/06/21 14:43:18 by dkhatri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "computorv2.h"
 
-static int	ft_matrix_validate(t_matrix *out, t_matrix *m1, t_matrix *m2, char op)
+static int	ft_matrix_validate(t_matrix *out,
+				t_matrix *m1, t_matrix *m2, char op)
 {
 	if (!out || !m1 || !m2 || !(m1->matrix) || !(m2->matrix)
 		|| !(m1->m) || !(m1->n) || !(m2->m) || !(m2->n))
@@ -32,7 +45,7 @@ int	ft_matrix_add(t_matrix *out, t_matrix *m1, t_matrix *m2, uint8_t sub)
 		while (j < out->n)
 		{
 			if (ft_var_op_wo_free(&(out->matrix[i][j]),
-					&(m2->matrix[i][j]), &(m1->matrix[i][j]), op) == -1)
+				&(m2->matrix[i][j]), &(m1->matrix[i][j]), op) == -1)
 				return (-1);
 			j += 1;
 		}
@@ -41,7 +54,8 @@ int	ft_matrix_add(t_matrix *out, t_matrix *m1, t_matrix *m2, uint8_t sub)
 	return (0);
 }
 
-static int	ft_matrix_mult_helper(t_matrix *out, t_matrix *m1, t_matrix *m2, uint32_t x[2])
+static int	ft_matrix_mult_helper(t_matrix *out, t_matrix *m1,
+				t_matrix *m2, uint32_t x[2])
 {
 	uint32_t	k;
 	t_var		tmp1;
@@ -55,7 +69,7 @@ static int	ft_matrix_mult_helper(t_matrix *out, t_matrix *m1, t_matrix *m2, uint
 	while (k < m1->n)
 	{
 		if (ft_var_op_wo_free(&tmp1,
-					&(m2->matrix[k][x[1]]), &(m1->matrix[x[0]][k]), '*') == -1)
+				&(m2->matrix[k][x[1]]), &(m1->matrix[x[0]][k]), '*') == -1)
 			return (-1);
 		if (ft_var_op(&tmp2, &(out->matrix[x[0]][x[1]]), &tmp1, '+') == -1)
 			return (-1);
@@ -104,7 +118,7 @@ int	ft_matrix_scalar_mult(t_matrix *out, t_matrix *m1, t_var *v)
 		while (j < out->n)
 		{
 			if (ft_var_op_wo_free(&(out->matrix[i][j]),
-					&(m1->matrix[i][j]), v, '*') == -1)
+				&(m1->matrix[i][j]), v, '*') == -1)
 				return (-1);
 			j += 1;
 		}

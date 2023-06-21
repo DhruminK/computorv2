@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:25:26 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 16:11:20 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/21 15:05:54 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ static int	ft_func_process_single_pvar(t_var *out, t_var *arg,
 	ret = ft_var_num_init(&pow, pvar->degree, 0);
 	if (ret != -1)
 		ret = ft_var_num_init(&coff, 0, &(pvar->coff));
-	if (ret != -1)
+	if (ret != -1 && pvar->degree != 0)
 		ret = ft_var_op_wo_free(&tmp_out, &pow, arg, '^');
+	else if (ret != 1 && pvar->degree == 0)
+		ret = ft_var_num_init(&tmp_out, 1, 0);
 	if (ret != -1)
 		ret = ft_var_op_wo_free(out, &coff, &tmp_out, '*');
 	ft_var_free(&pow);

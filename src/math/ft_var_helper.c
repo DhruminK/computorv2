@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:04:53 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 16:10:45 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/21 14:43:35 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_matrix_cpy(t_matrix *dst, t_matrix *src)
 		while (j < src->n)
 		{
 			if (ft_var_cpy_no_name(&(dst->matrix[i][j]),
-					&(src->matrix[i][j])) == -1)
+				&(src->matrix[i][j])) == -1)
 				return (-1);
 			j += 1;
 		}
