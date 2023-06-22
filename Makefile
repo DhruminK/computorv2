@@ -11,12 +11,12 @@ FUNC_PATH = func/
 
 HELPER = ft_var_free.c ft_var_op.c
 MATH = complex_helper.c ft_newton.c ft_var_helper.c math_helper.c \
-	   ft_matrix_helper.c ft_matrix_op.c \
+	   ft_matrix_helper.c ft_matrix_op.c ft_helper_func.c \
 	   ft_poly_helper.c ft_poly_add.c ft_poly_mult.c \
-	   ft_gen_frac.c
+	   ft_gen_frac.c ft_solve_eqn.c ft_solve_eqn_helper.c
 PARSER = ft_parse_helper.c ft_parse_num.c ft_parse_op.c ft_parse_poly.c \
 		 ft_parse_var.c ft_parse_func_assign.c ft_parse_line.c \
-		 ft_parse_poly_var.c ft_parse_func.c ft_parse_matrix.c
+		 ft_parse_poly_var.c ft_parse_func.c ft_parse_matrix.c ft_parse_eqn.c
 PRINT = ft_print_helper.c ft_print_stack.c
 STACK = ft_lst_helper.c ft_stack_helper.c
 FUNC = ft_func_math.c ft_func_num_process.c ft_func_poly_process.c

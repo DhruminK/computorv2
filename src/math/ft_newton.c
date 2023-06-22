@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 15:35:21 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/08 15:17:34 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/22 17:31:36 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_newton(double val, uint16_t pow, double *out)
 
 	if (!out || val < 0.0)
 		return (-1);
-	if (pow == 1)
+	if (pow == 1 || val == 0)
 		return (val);
 	xn = val;
 	i = -1;
@@ -43,6 +43,9 @@ int	ft_gen_pow(double val, double pow, double *out)
 
 	if (!out)
 		return (-1);
+	*out = 0;
+	if (val == 0)
+		return (0);
 	ft_gen_frac(pow, &numr, &deno);
 	*out = ft_pow(val, numr);
 	if (deno > 1 && numr < 0)

@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:33:13 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 16:13:52 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/22 17:07:30 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	ft_parse_poly_line(char **inp, char *var_name,
 		return (ft_parse_num_str(inp, 0, poly_op));
 	if (val == 11)
 		return (ft_parse_matrix(inp, poly_op));
+	if (val == 7 && poly_op->poly_inp->end_char == *(*inp))
+		return (0);
 	if (val == 3 || val == 4 || val == 5 || val == 6
 		|| val == 8 || val == 9 || val == 10)
 		return (ft_parse_op(inp, poly_op));
@@ -68,6 +70,8 @@ int	ft_parse_poly(t_poly_inp *poly_inp)
 		&& *(poly_inp->inp) != poly_inp->end_char)
 	{
 		ft_skipspaces(&(poly_inp->inp));
+		if (*(poly_inp->inp) == poly_inp->end_char)
+			continue ;
 		ret = ft_parse_poly_line(&(poly_inp->inp), poly_inp->var_name,
 				poly_inp->vars_avail, &poly_op);
 		if (ret == -1)

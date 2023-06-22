@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:08:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/21 14:41:09 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/22 16:45:59 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int					ft_parse_inp_move(char **inp);
 void				ft_parse_num(char **inp, double *coff, int8_t is_minus);
 int					ft_parse_var(char **inp, t_list *vars, t_list **stack_vars);
 
+int					ft_find_var_from_name(char *var_name, t_list *vars,
+						t_var **new_v);
 void				ft_var_free(t_var *var);
 int					ft_var_op(t_var *out, t_var *v1, t_var *v2, char op);
 int					ft_var_op_wo_free(t_var *out, t_var *v1,
@@ -181,12 +183,18 @@ int					ft_parse_poly_var(char **inp, t_poly_op *poly_op,
 int					ft_parse_func_var(t_var *func, char **inp,
 						t_poly_op *poly_op);
 int					ft_parse_matrix(char **inp, t_poly_op *poly_op);
+int					ft_parse_eqn(char *buf, t_list *vars);
 
 int					ft_op_precedence(char op);
 
 int					ft_process_func_op(t_var *out, t_var *func, t_var *arg);
 int					ft_func_num_process(t_var *out, t_var *func, t_var *arg);
 int					ft_func_poly_process(t_var *out, t_var *func, t_var *arg);
+
+int					ft_solve_eqn(t_var *v);
+void				ft_solve_quad(t_cd *coff, t_cd *des);
+void				ft_solve_outlier(t_cd c);
+void				ft_solve_linear(t_cd *coff);
 
 void				ft_sigint_recv(int signo);
 #endif
