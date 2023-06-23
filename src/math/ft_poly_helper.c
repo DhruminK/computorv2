@@ -104,6 +104,7 @@ int	ft_poly_cpy(t_poly *dst, t_poly *src)
 		return (-1);
 	ft_poly_init(dst, 0, 0);
 	ele = src->coff;
+	ret = 0;
 	while (ele)
 	{
 		pvar = (t_poly_var *)(ele->content);

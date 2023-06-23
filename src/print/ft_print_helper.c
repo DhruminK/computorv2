@@ -14,23 +14,22 @@
 
 void	ft_print_complex(t_cd *c, uint8_t in_poly, uint8_t is_first)
 {
-	int		mult;
+	int	mult;
 
 	if (!c)
 		return ;
 	mult = 1;
 	if (c->real < 0.0 && in_poly)
-	{
-		printf(" - ");
 		mult = -1;
-	}
+	if (c->real < 0.0 && in_poly)
+		printf(" - ");
 	else if (in_poly && !is_first)
 		printf(" + ");
 	if (in_poly && c->imag != 0.0)
 		printf("(");
-	printf("%0.1f", mult * c->real);
+	printf("%0.1f", c->real * mult);
 	if (c->imag * mult < 0.0)
-		printf(" - %0.1fi", c->imag);
+		printf(" - %0.1fi", c->imag * mult * -1);
 	else if (c->imag * mult > 0.0)
 		printf(" + %0.1fi", c->imag * mult);
 	if (in_poly && c->imag != 0.0)

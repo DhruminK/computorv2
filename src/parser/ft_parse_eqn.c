@@ -52,6 +52,7 @@ static int	ft_find_unkown_var(t_list *vars, char *buf, char **var_name)
 		if (val != 1)
 			buf += 1;
 	}
+	*var_name = 0;
 	return (1);
 }
 
@@ -62,7 +63,7 @@ static int	ft_parse_lhs_rhs(char *buf, t_var *out,
 	t_var		lhs;
 	int			ret;
 
-	if (!buf || !out || !var_name)
+	if (!buf || !out)
 		return (-1);
 	memset(out, 0, sizeof(t_var));
 	pi.var_name = var_name;
@@ -93,6 +94,7 @@ int	ft_parse_eqn(char *buf, t_list *vars)
 
 	if (!buf)
 		return (-1);
+	memset(&out, 0, sizeof(t_var));
 	ret = ft_find_unkown_var(vars, buf, &(var_name));
 	if (ret == -1)
 		return (-1);

@@ -55,6 +55,7 @@ static int	ft_determinant(t_var *v, t_cd *det, t_cd *coff)
 		m = -1;
 	if (ft_gen_pow(det->real * m, 0.5, &out) == -1)
 		return (-1);
+	memset(det, 0, sizeof(t_cd));
 	if (m == 1)
 		det->real = out;
 	else
@@ -67,6 +68,11 @@ int	ft_solve_eqn(t_var *v)
 	t_cd	coff[3];
 	t_cd	des;
 
+	if (!v)
+		return (-1);
+	printf("Simplified equations : ");
+	ft_print_var(v, 0);
+	printf(" = %0.1f\n", 0.0);
 	if (ft_determinant(v, &des, (t_cd *)coff) == -1)
 		return (-1);
 	if (coff[2].real == 0 && coff[2].imag == 0

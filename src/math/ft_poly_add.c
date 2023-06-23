@@ -16,9 +16,13 @@ static int	ft_poly_add_sub_single_var(t_poly *out, t_poly_var *pvar1,
 				t_poly_var *pvar2, uint8_t sub)
 {
 	t_cd	c;
+	double	d;
 
 	if (!out)
 		return (-1);
+	d = 1;
+	if (sub)
+		d = -1;
 	if (pvar1 && pvar2 && pvar1->degree == pvar2->degree)
 	{
 		ft_cd_add(&c, pvar1->coff, pvar2->coff, sub);
@@ -26,7 +30,8 @@ static int	ft_poly_add_sub_single_var(t_poly *out, t_poly_var *pvar1,
 	}
 	if (pvar1 && ft_poly_var_init(out, pvar1->degree, pvar1->coff) == -1)
 		return (-1);
-	if (pvar2 && ft_poly_var_init(out, pvar2->degree, pvar2->coff) == -1)
+	if ((pvar2 && ft_cd_scalar_mult(&c, d, pvar2->coff) == -1)
+		|| (pvar2 && ft_poly_var_init(out, pvar2->degree, c) == -1))
 		return (-1);
 	return (0);
 }

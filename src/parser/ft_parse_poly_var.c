@@ -72,5 +72,6 @@ int	ft_parse_poly_var(char **inp, t_poly_op *poly_op, char *var_name)
 		ft_var_free(&v);
 		return (-1);
 	}
+	poly_op->prev_type = v.type;
 	return (1);
 }
