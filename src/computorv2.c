@@ -6,11 +6,25 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:24:49 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:24:50 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 20:49:32 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computorv2.h"
+
+int	ft_error_print(int err_no, int ret)
+{
+	if (err_no == -2)
+		printf("Error while calculation, "
+			"cannot find root of irrational power\n");
+	else if (err_no == 1)
+		printf("Error while parsing assignment operation\n");
+	else if (err_no == 2)
+		printf("Error while parsing polynomial operation\n");
+	else if (err_no == 3)
+		printf("Error while parsing polynomial equation solution\n");
+	return (ret);
+}
 
 /**
 static int	ft_process_line(char *buf, t_list *vars)
@@ -60,7 +74,7 @@ int	main(void)
 	while (1)
 	{
 		ret = ft_get_line(&vars);
-		if (ret < 1)
+		if (ret == 0)
 			break ;
 	}
 	if (ret < 0)

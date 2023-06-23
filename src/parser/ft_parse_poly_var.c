@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:34:18 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:34:31 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 20:37:21 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,18 @@ static int	ft_parse_poly_var_name_validate(char **inp, double *deg,
 	return (1);
 }
 
+static int	ft_poly_var_name_process(t_poly_op *poly_op, int ret)
+{
+	if (!poly_op)
+		return (-1);
+	if (ret < 1)
+		return (ret);
+	if (poly_op->prev_type != CV2_NONE && poly_op->prev_type != CV2_OP
+		&& ft_add_op_stack(poly_op, '*') == -1)
+		return (-1);
+	return (ret);
+}
+
 int	ft_parse_poly_var(char **inp, t_poly_op *poly_op, char *var_name)
 {
 	double	deg;
@@ -57,10 +69,10 @@ int	ft_parse_poly_var(char **inp, t_poly_op *poly_op, char *var_name)
 	if (!inp || !poly_op || !var_name)
 		return (-1);
 	ret = ft_parse_poly_var_name_validate(inp, &deg, var_name);
+	ret = ft_poly_var_name_process(poly_op, ret);
 	if (ret < 1)
 		return (ret);
-	memset(&coff, 0, sizeof(t_cd));
-	coff.real = 1;
+	ft_cd_init(&coff, 1, 0);
 	v.var_name = 0;
 	v.type = CV2_POLY;
 	ft_poly_init(&(v.choice.poly), 0, var_name);
@@ -68,10 +80,9 @@ int	ft_parse_poly_var(char **inp, t_poly_op *poly_op, char *var_name)
 		return (-1);
 	ret = ft_stack_push(&(poly_op->stack_vars), &v);
 	if (ret == -1)
-	{
 		ft_var_free(&v);
+	if (ret == -1)
 		return (-1);
-	}
 	poly_op->prev_type = v.type;
 	return (1);
 }

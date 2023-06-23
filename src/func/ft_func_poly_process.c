@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:26:21 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 13:57:16 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 18:51:41 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,16 @@ static int	ft_func_poly_pvar_loop(t_var *out, t_var *arg, t_list *func)
 
 	if (!out || !arg || !func)
 		return (-1);
-	while (func)
+	memset(&tmp_out, 0, sizeof(t_var));
+	ret = ft_var_num_init(&tmp_out1, 0, 0);
+	while (func && ret != -1)
 	{
 		pvar = (t_poly_var *)(func->content);
 		ret = ft_func_poly_single_pvar(&tmp_out, arg, pvar);
-		if (ret == -1)
+		if (ret != -1)
 			ret = ft_var_op(out, &tmp_out1, &tmp_out, '+');
-		if (ret == -1)
+		if (ret != -1)
 			ret = ft_var_cpy_no_name(&tmp_out1, out);
-		if (ret == -1)
-			break ;
 		func = func->next;
 	}
 	if (ret == -1)

@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:36:03 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 16:10:21 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 21:01:49 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	ft_poly_free(t_poly *poly)
 
 	if (!poly)
 		return ;
+	if (poly->var_name)
+		free(poly->var_name);
 	ele = poly->coff;
 	while (ele)
 	{

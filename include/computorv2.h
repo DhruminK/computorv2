@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:08:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/22 16:45:59 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 20:01:58 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,4 +197,5 @@ void				ft_solve_outlier(t_cd c);
 void				ft_solve_linear(t_cd *coff);
 
 void				ft_sigint_recv(int signo);
+int					ft_error_print(int err_no, int ret);
 #endif

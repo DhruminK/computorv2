@@ -6,11 +6,48 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 13:11:51 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 15:31:45 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 20:52:36 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computorv2.h"
+
+static int	ft_valid_extra(char ch)
+{
+	if (ch == '(')
+		return (9);
+	else if (ch == ')')
+		return (10);
+	else if (ch == '[')
+		return (11);
+	else if (ch == ']')
+		return (12);
+	else if (ch == ';')
+		return (13);
+	return (0);
+}
+
+int	ft_valid(char ch)
+{
+	if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
+		return (1);
+	else if (ch >= '0' && ch <= '9')
+		return (2);
+	else if (ch == '+')
+		return (3);
+	else if (ch == '-')
+		return (4);
+	else if (ch == '*')
+		return (5);
+	else if (ch == '/')
+		return (6);
+	else if (ch == '=')
+		return (7);
+	else if (ch == '^')
+		return (8);
+	else
+		return (ft_valid_extra(ch));
+}
 
 static int	ft_parse_func_arg(t_var *out, char **inp, t_poly_op *poly_op)
 {

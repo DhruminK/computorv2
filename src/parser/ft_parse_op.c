@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:38:56 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/21 15:04:40 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 20:32:45 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,7 @@ int	ft_parse_op(char **inp, t_poly_op *poly_op)
 	ret = ft_parse_op_validate(op, poly_op);
 	if (ret != 0)
 		return (ret);
-	ret = ft_valid(*((*inp)++));
-	if (ret == 1 || ret == 2 || ret == 7)
-		return (-1);
-	if (ret == 5 && *(*inp) == '*')
+	if (op == '*' && *(*inp) == '*')
 	{
 		(*inp) += 1;
 		op = 'm';

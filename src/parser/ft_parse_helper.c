@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:32:51 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/17 12:29:07 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 20:52:46 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_skipspaces(char **inp)
 	*inp = s;
 }
 
+/**
 int	ft_valid(char ch)
 {
 	if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
@@ -55,6 +56,7 @@ int	ft_valid(char ch)
 		return (13);
 	return (0);
 }
+*/
 
 int	ft_parse_inp_move(char **inp)
 {

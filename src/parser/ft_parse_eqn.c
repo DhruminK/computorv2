@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 13:10:42 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/22 17:18:19 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/23 20:47:41 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	ft_search_var_name(char **inp, char **var_name, t_list *vars)
 	ret = ft_find_var_from_name(*var_name, vars, &v);
 	if (ret == -1 || ret == 1)
 		free(*var_name);
+	(*inp) += i;
 	return (ret);
 }
 
