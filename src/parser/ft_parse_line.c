@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:29:20 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/22 16:35:27 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/24 13:57:10 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	ft_process_line(char *buf, t_list **vars)
 	if (ret == -1)
 		return (-1);
 	if (ret == 0)
-		return (ft_parse_eqn(buf, *vars));
+		return (ft_error_print(3, ft_parse_eqn(buf, *vars)));
 	if (ret == 1)
-		return (ft_parse_assign(buf, vars));
-	return (ft_parse_line_poly(buf, *vars));
+		return (ft_error_print(1, ft_parse_assign(buf, vars)));
+	return (ft_error_print(2, ft_parse_line_poly(buf, *vars)));
 }

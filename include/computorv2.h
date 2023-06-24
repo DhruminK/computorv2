@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 16:08:00 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/23 20:01:58 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/24 14:02:54 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <signal.h>
+# include <math.h>
 # include "get_next_line.h"
 
 # define MAX_ITERATIONS	20

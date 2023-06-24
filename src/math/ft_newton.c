@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 15:35:21 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/22 17:31:36 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/24 14:06:53 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ int	ft_gen_pow(double val, double pow, double *out)
 		*out = *out * root;
 	else if (deno > 1)
 		*out = root;
+	if (isnormal(*out) == 0)
+		return (ft_error_print(-2, -1));
 	return (0);
 }

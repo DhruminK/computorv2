@@ -6,7 +6,7 @@
 /*   By: dkhatri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 12:24:49 by dkhatri           #+#    #+#             */
-/*   Updated: 2023/06/23 20:49:32 by dkhatri          ###   ########.fr       */
+/*   Updated: 2023/06/24 13:55:05 by dkhatri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_error_print(int err_no, int ret)
 {
+	if (ret != -1)
+		return (ret);
 	if (err_no == -2)
 		printf("Error while calculation, "
 			"cannot find root of irrational power\n");
